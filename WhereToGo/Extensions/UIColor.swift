@@ -29,6 +29,6 @@ extension UIColor {
         return UIColor(red: 51/255.0, green: 153/255.0, blue: 255/255.0, alpha: 1)
     }
     static var greyLabel: UIColor {
-           return UIColor(red: 109/255.0, green: 114/255.0, blue: 120/255.0, alpha: 1)
-       }
+        return UIColor(red: 109/255.0, green: 114/255.0, blue: 120/255.0, alpha: 1)
+    }
 }
