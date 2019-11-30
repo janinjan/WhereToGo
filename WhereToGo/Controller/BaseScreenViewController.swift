@@ -15,7 +15,7 @@ class BaseScreenViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
 
     // MARK: - Properties
-    let categories = [(#imageLiteral(resourceName: "AllButton"), "All"),(#imageLiteral(resourceName: "ShopButton"), "Shop"), (#imageLiteral(resourceName: "FoodButton"), "Food"), (#imageLiteral(resourceName: "HotelsButton"), "Hotels"), (#imageLiteral(resourceName: "BikesButton"),  "Bikes"), (#imageLiteral(resourceName: "WaterButton"), "Water")]
+    let categories = [(#imageLiteral(resourceName: "AllButton"),"All"),(#imageLiteral(resourceName: "ShopButton"), "Shop"), (#imageLiteral(resourceName: "FoodButton"), "Food"), (#imageLiteral(resourceName: "HotelsButton"), "Hotels"), (#imageLiteral(resourceName: "BikesButton"),  "Bikes"), (#imageLiteral(resourceName: "WaterButton"), "Water")]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +43,17 @@ extension BaseScreenViewController: UICollectionViewDataSource {
 // MARK: - CollectionView delegate
 // =========================================
 extension BaseScreenViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let selectedCell = collectionView.cellForItem(at: indexPath) as? CategoryCollectionViewCell else { return }
+        selectedCell.categoryName.textColor = .black
+        selectedCell.chevronDownSymbol.tintColor = .black
+    }
     
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        guard let selectedCell = collectionView.cellForItem(at: indexPath) as? CategoryCollectionViewCell else { return }
+        selectedCell.categoryName.textColor = .darkGray
+        selectedCell.chevronDownSymbol.tintColor = .clear
+    }
 }
 
 // =========================================
