@@ -29,7 +29,9 @@ class BaseScreenViewController: UIViewController {
         super.viewDidLoad()
         collectionView.dataSource = self
         collectionView.delegate = self
+        setupMapCoordinate()
         checkLocationServices()
+        mapView.register(PointOfInterestAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
     }
 
     // MARK: - Methods
@@ -43,10 +45,10 @@ class BaseScreenViewController: UIViewController {
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
         case .restricted:
-            // present alert
+            presentAlert(ofType: .locationRestricted)
             break
         case .denied:
-            // present alert
+            presentAlert(ofType: .permissionDenied)
             break
         case .authorizedAlways:
             break
@@ -64,7 +66,7 @@ class BaseScreenViewController: UIViewController {
             setupLocationManager()
             checkLocationAuthorization()
         } else {
-            // present alert
+            presentAlert(ofType: .locationDisabled) // Display alert letting the users know that they have to turn Location on
         }
     }
 }
@@ -79,6 +81,7 @@ extension BaseScreenViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoryCell", for: indexPath) as? CategoryCollectionViewCell else { return UICollectionViewCell() }
+
         cell.category = categories[indexPath.row]
         return cell
     }
@@ -133,7 +136,7 @@ extension BaseScreenViewController: MKMapViewDelegate {
         mapView.setRegion(region, animated: true)
     }
 
-    func setup() {
+    func setupMapCoordinate() {
         setupMap(coordinate: coordinateInit, myLatitude: 0.07, myLongitude: 0.07)
         mapView.delegate = self
     }
