@@ -18,6 +18,7 @@
 		3DE438DA238F48F2005051C4 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE438D9238F48F2005051C4 /* CategoryCollectionViewCell.swift */; };
 		3DE438DC238F5CF0005051C4 /* CitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE438DB238F5CF0005051C4 /* CitiesViewController.swift */; };
 		3DE438DE238F67A2005051C4 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE438DD238F67A2005051C4 /* FavoritesViewController.swift */; };
+		3DF1BCA92393166E0084478C /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF1BCA82393166E0084478C /* UIColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		3DE438D9238F48F2005051C4 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		3DE438DB238F5CF0005051C4 /* CitiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesViewController.swift; sourceTree = "<group>"; };
 		3DE438DD238F67A2005051C4 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		3DF1BCA82393166E0084478C /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 		3DE438AA238DDA39005051C4 /* WhereToGo */ = {
 			isa = PBXGroup;
 			children = (
+				3DF1BCA7239314D80084478C /* Extensions */,
 				3DE438D6238DE91F005051C4 /* Supporting Files */,
 				3DE438D3238DE8A3005051C4 /* Model */,
 				3DE438D4238DE8C8005051C4 /* View */,
@@ -150,6 +153,14 @@
 				3DE438B4238DDA3A005051C4 /* Assets.xcassets */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3DF1BCA7239314D80084478C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3DF1BCA82393166E0084478C /* UIColor.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -254,6 +265,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3DE438DA238F48F2005051C4 /* CategoryCollectionViewCell.swift in Sources */,
+				3DF1BCA92393166E0084478C /* UIColor.swift in Sources */,
 				3DE438DC238F5CF0005051C4 /* CitiesViewController.swift in Sources */,
 				3DE438AC238DDA39005051C4 /* AppDelegate.swift in Sources */,
 				3DE438D8238DEA8D005051C4 /* BaseScreenViewController.swift in Sources */,

@@ -25,5 +25,6 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         chevronDownSymbol.image = UIImage(systemName: "chevron.down")
         chevronDownSymbol.tintColor = .clear
+        categoryName.textColor = .greyLabel
     }
 }

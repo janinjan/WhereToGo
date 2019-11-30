@@ -51,7 +51,7 @@ extension BaseScreenViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         guard let selectedCell = collectionView.cellForItem(at: indexPath) as? CategoryCollectionViewCell else { return }
-        selectedCell.categoryName.textColor = .darkGray
+        selectedCell.categoryName.textColor = .greyLabel
         selectedCell.chevronDownSymbol.tintColor = .clear
     }
 }
