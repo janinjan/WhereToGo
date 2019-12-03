@@ -18,7 +18,7 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="IL8-ww-ZBu">
                                 <rect key="frame" x="0.0" y="88" width="414" height="115"/>
-                                <color key="backgroundColor" red="0.97647058823529409" green="1" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.98746514581956379" green="1" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="115" id="RtO-ik-KsB"/>
                                 </constraints>
@@ -96,7 +96,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="E2M-ua-Qg2">
                         <barButtonItem key="leftBarButtonItem" id="vGZ-q4-xqo">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="0VJ-eZ-2H0">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="0VJ-eZ-2H0">
                                 <rect key="frame" x="20" y="0.0" width="138" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
@@ -168,6 +168,50 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="deP-Ea-Zsr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1739" y="127"/>
+        </scene>
+        <!--Slider View Controller-->
+        <scene sceneID="6gR-so-1LV">
+            <objects>
+                <viewController storyboardIdentifier="slider" id="cQl-S2-QBl" customClass="SliderViewController" customModule="WhereToGo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wPy-0N-LIZ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="anB-qh-gqj" userLabel="Handle Area">
+                                <rect key="frame" x="0.0" y="44" width="414" height="34"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VOK-82-hYT">
+                                        <rect key="frame" x="140" y="14" width="134" height="6"/>
+                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="6" id="VBm-px-xQ0"/>
+                                            <constraint firstAttribute="width" constant="134" id="fSs-nd-Itr"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="VOK-82-hYT" firstAttribute="centerX" secondItem="anB-qh-gqj" secondAttribute="centerX" id="EKr-7B-wDb"/>
+                                    <constraint firstAttribute="height" constant="34" id="Xg6-7L-2mo"/>
+                                    <constraint firstItem="VOK-82-hYT" firstAttribute="centerY" secondItem="anB-qh-gqj" secondAttribute="centerY" id="xck-u6-QBM"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.9882352941176471" green="1" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="anB-qh-gqj" firstAttribute="top" secondItem="kKY-oC-Uey" secondAttribute="top" id="6L6-tn-CoT"/>
+                            <constraint firstItem="anB-qh-gqj" firstAttribute="trailing" secondItem="kKY-oC-Uey" secondAttribute="trailing" id="99d-1N-8wP"/>
+                            <constraint firstItem="anB-qh-gqj" firstAttribute="leading" secondItem="kKY-oC-Uey" secondAttribute="leading" id="t6Z-h9-i57"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="kKY-oC-Uey"/>
+                    </view>
+                    <connections>
+                        <outlet property="handleArea" destination="anB-qh-gqj" id="tbV-AQ-sqT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QGP-pT-764" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2486.9565217391305" y="126.5625"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Uyb-hr-jMq">
