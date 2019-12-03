@@ -12,6 +12,7 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     // MARK: - Outlets
     @IBOutlet weak var categoryImageView: UIImageView!
     @IBOutlet weak var categoryName: UILabel!
+    @IBOutlet weak var chevronDownSymbol: UIImageView!
 
     // MARK: - Properties
     var category: (UIImage, String)? {
@@ -22,6 +23,8 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     }
 
     override func awakeFromNib() {
-
+        chevronDownSymbol.image = UIImage(systemName: "chevron.down")
+        chevronDownSymbol.tintColor = .clear
+        categoryName.textColor = .greyLabel
     }
 }

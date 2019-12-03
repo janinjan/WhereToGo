@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3D2BE471239051D800AF7E39 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D2BE470239051D700AF7E39 /* MapKit.framework */; };
+		3DCA743623933A4F009A2CE3 /* SliderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCA743523933A4F009A2CE3 /* SliderViewController.swift */; };
 		3DE438AC238DDA39005051C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE438AB238DDA39005051C4 /* AppDelegate.swift */; };
 		3DE438AE238DDA39005051C4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE438AD238DDA39005051C4 /* SceneDelegate.swift */; };
 		3DE438B3238DDA39005051C4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DE438B1238DDA39005051C4 /* Main.storyboard */; };
@@ -18,6 +19,10 @@
 		3DE438DA238F48F2005051C4 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE438D9238F48F2005051C4 /* CategoryCollectionViewCell.swift */; };
 		3DE438DC238F5CF0005051C4 /* CitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE438DB238F5CF0005051C4 /* CitiesViewController.swift */; };
 		3DE438DE238F67A2005051C4 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE438DD238F67A2005051C4 /* FavoritesViewController.swift */; };
+		3DF1BCA92393166E0084478C /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF1BCA82393166E0084478C /* UIColor.swift */; };
+		3DF1BCAB239322AA0084478C /* PointOfInterest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF1BCAA239322AA0084478C /* PointOfInterest.swift */; };
+		3DF1BCAD239323810084478C /* PointOfInterestAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF1BCAC239323810084478C /* PointOfInterestAnnotationView.swift */; };
+		3DF1BCAF239330B40084478C /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF1BCAE239330B40084478C /* UIViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		3D2BE470239051D700AF7E39 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		3DCA743523933A4F009A2CE3 /* SliderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderViewController.swift; sourceTree = "<group>"; };
 		3DE438A8238DDA39005051C4 /* WhereToGo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhereToGo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DE438AB238DDA39005051C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3DE438AD238DDA39005051C4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -46,6 +52,10 @@
 		3DE438D9238F48F2005051C4 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		3DE438DB238F5CF0005051C4 /* CitiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesViewController.swift; sourceTree = "<group>"; };
 		3DE438DD238F67A2005051C4 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		3DF1BCA82393166E0084478C /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		3DF1BCAA239322AA0084478C /* PointOfInterest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointOfInterest.swift; sourceTree = "<group>"; };
+		3DF1BCAC239323810084478C /* PointOfInterestAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointOfInterestAnnotationView.swift; sourceTree = "<group>"; };
+		3DF1BCAE239330B40084478C /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +107,7 @@
 		3DE438AA238DDA39005051C4 /* WhereToGo */ = {
 			isa = PBXGroup;
 			children = (
+				3DF1BCA7239314D80084478C /* Extensions */,
 				3DE438D6238DE91F005051C4 /* Supporting Files */,
 				3DE438D3238DE8A3005051C4 /* Model */,
 				3DE438D4238DE8C8005051C4 /* View */,
@@ -117,6 +128,7 @@
 		3DE438D3238DE8A3005051C4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3DF1BCAA239322AA0084478C /* PointOfInterest.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -127,6 +139,7 @@
 				3DE438B1238DDA39005051C4 /* Main.storyboard */,
 				3DE438B6238DDA3A005051C4 /* LaunchScreen.storyboard */,
 				3DE438D9238F48F2005051C4 /* CategoryCollectionViewCell.swift */,
+				3DF1BCAC239323810084478C /* PointOfInterestAnnotationView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -137,6 +150,7 @@
 				3DE438D7238DEA8D005051C4 /* BaseScreenViewController.swift */,
 				3DE438DB238F5CF0005051C4 /* CitiesViewController.swift */,
 				3DE438DD238F67A2005051C4 /* FavoritesViewController.swift */,
+				3DCA743523933A4F009A2CE3 /* SliderViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -150,6 +164,15 @@
 				3DE438B4238DDA3A005051C4 /* Assets.xcassets */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3DF1BCA7239314D80084478C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3DF1BCA82393166E0084478C /* UIColor.swift */,
+				3DF1BCAE239330B40084478C /* UIViewController.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -253,9 +276,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3DF1BCAB239322AA0084478C /* PointOfInterest.swift in Sources */,
 				3DE438DA238F48F2005051C4 /* CategoryCollectionViewCell.swift in Sources */,
+				3DF1BCA92393166E0084478C /* UIColor.swift in Sources */,
+				3DF1BCAD239323810084478C /* PointOfInterestAnnotationView.swift in Sources */,
+				3DF1BCAF239330B40084478C /* UIViewController.swift in Sources */,
 				3DE438DC238F5CF0005051C4 /* CitiesViewController.swift in Sources */,
 				3DE438AC238DDA39005051C4 /* AppDelegate.swift in Sources */,
+				3DCA743623933A4F009A2CE3 /* SliderViewController.swift in Sources */,
 				3DE438D8238DEA8D005051C4 /* BaseScreenViewController.swift in Sources */,
 				3DE438DE238F67A2005051C4 /* FavoritesViewController.swift in Sources */,
 				3DE438AE238DDA39005051C4 /* SceneDelegate.swift in Sources */,
