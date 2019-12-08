@@ -25,18 +25,26 @@ class BaseScreenViewController: UIViewController, CityPickerDelegate {
     // MARK: - Properties
     let categories = [(#imageLiteral(resourceName: "AllButton"),"All"),(#imageLiteral(resourceName: "ShopButton"), "Shop"), (#imageLiteral(resourceName: "FoodButton"), "Food"), (#imageLiteral(resourceName: "HotelsButton"), "Hotels"), (#imageLiteral(resourceName: "BikesButton"),  "Bikes"), (#imageLiteral(resourceName: "WaterButton"), "Water")]
     var selectedCity: City = .naples
+    var naplesCoordinates = CLLocationCoordinate2D(latitude: 40.8663100, longitude: 14.2864100)
+    var parisCoordinates = CLLocationCoordinate2D(latitude: 48.864716, longitude: 2.349014)
 
     let firestoreService = FirestoreService()
 
     var coordinateInit: CLLocationCoordinate2D {
-        return CLLocationCoordinate2D(latitude: 40.8663100, longitude: 14.2864100) // Naples coordinate
+        switch selectedCity {
+        case .naples:
+            return naplesCoordinates
+        case .paris:
+            return parisCoordinates
+        }
     }
+
     let locationManager = CLLocationManager() // get a location manager reference
 
-//    // MARK: - Actions
-//    @IBAction func didTapChangeCity(_ sender: UIButton) {
-//        performSegue(withIdentifier: "BaseToCities", sender: self)
-//    }
+    // MARK: - Actions
+    @IBAction func didTapChangeCity(_ sender: UIButton) {
+        performSegue(withIdentifier: "BaseToCities", sender: self)
+    }
 
     // MARK: - Properties (Slider)
     var sliderViewController: SliderViewController!
@@ -78,7 +86,7 @@ class BaseScreenViewController: UIViewController, CityPickerDelegate {
     func changeCity(name: City) {
         cityName.setTitle(name.name() + " ⌵", for: .normal)
         selectedCity = name
-        print(selectedCity.name())
+        setupMapCoordinate() // Update view to selected city's coordinates
     }
 
     func getNaplesDatas() {

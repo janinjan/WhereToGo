@@ -21,6 +21,7 @@ class CitiesViewController: UIViewController {
 
     // MARK: - Properties
     weak var delegate: CityPickerDelegate? // Created a delegate property
+    var citySymbolsImage = (#imageLiteral(resourceName: "ParisSymbol"), #imageLiteral(resourceName: "NaplesSymbol"))
 
     // MARK: - ViewController LifeCycle
     override func viewDidLoad() {
@@ -40,9 +41,18 @@ extension CitiesViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cityCell", for: indexPath)
         let cityName = City.allCases[indexPath.row].name()
         cell.textLabel?.text = cityName
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 20.0)
+        switch cityName {
+        case City.paris.name():
+            cell.imageView?.image = citySymbolsImage.0
+        case City.naples.name():
+            cell.imageView?.image = citySymbolsImage.1
+        default:
+            break
+        }
         return cell
     }
 }
@@ -57,18 +67,5 @@ extension CitiesViewController: UITableViewDelegate {
         let selectedCity = City.allCases[indexPath.row]
         delegate?.changeCity(name: selectedCity)
         dismiss(animated: true) // Close controller after city selection
-    }
-
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let label = UILabel()
-        label.text = "Add some ingredient in the list"
-        label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
-        label.textAlignment = .center
-        label.textColor = .darkGray
-        return label
-    }
-
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return City.allCases.isEmpty ? 200 : 0
     }
 }

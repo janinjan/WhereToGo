@@ -37,7 +37,8 @@ class FirestoreService {
                     }
                     let title = document.get("title")
                     let address = document.get("address")
-                    
+                    let website = document.get("website")
+                    let phoneNumber = document.get("phoneNumber")
                     let category = document.get("category") as? String
                     let categoryType: InterestCategory
                     switch category {
@@ -57,7 +58,7 @@ class FirestoreService {
                     
                     let object = PointOfInterest(coordinate: self.coordinate, interestCategory: categoryType,
                                                  title: title as! String, address: address as! String,
-                                                 image: "", phoneNumber: "", website: "")
+                                                 image: "", phoneNumber: phoneNumber as! String, website: website as! String)
                     
                     self.addFetchObjectToArray(object: object) // add object to their corresponding arrays
                     completionHandler(object)
