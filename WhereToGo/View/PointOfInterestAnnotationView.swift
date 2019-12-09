@@ -20,14 +20,19 @@ class PointOfInterestAnnotationView: MKMarkerAnnotationView {
                     break
                 case .shop:
                     markerTintColor = UIColor.shopColor
+                    glyphImage = UIImage(named: "ShopGlyph")
                 case .food:
                     markerTintColor = UIColor.foodColor
+                     glyphImage = UIImage(named: "FoodGlyph")
                 case .hotel:
                     markerTintColor = UIColor.hotelsColor
+                     glyphImage = UIImage(named: "HotelGlyph")
                 case .bike:
                     markerTintColor = UIColor.bikesColor
+                     glyphImage = UIImage(named: "BikeGlyph")
                 case .water:
                     markerTintColor = UIColor.waterColor
+                     glyphImage = UIImage(named: "WaterGlyph")
                 }
             }
             canShowCallout = true

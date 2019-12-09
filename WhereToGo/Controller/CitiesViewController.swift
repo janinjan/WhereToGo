@@ -30,6 +30,10 @@ class CitiesViewController: UIViewController {
         tableView.delegate = self
         tableView.tableFooterView = UIView() // Hides empty cells from TableView
     }
+
+    @IBAction func dismissCitySelection(_ sender: Any) {
+        dismiss(animated: true)
+    }
 }
 
 // =========================================
@@ -44,7 +48,7 @@ extension CitiesViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cityCell", for: indexPath)
         let cityName = City.allCases[indexPath.row].name()
         cell.textLabel?.text = cityName
-        cell.textLabel?.font = UIFont.systemFont(ofSize: 20.0)
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 25.0)
         switch cityName {
         case City.paris.name():
             cell.imageView?.image = citySymbolsImage.0

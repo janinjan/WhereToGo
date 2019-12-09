@@ -23,7 +23,7 @@ class BaseScreenViewController: UIViewController, CityPickerDelegate {
     @IBOutlet weak var cityName: UIButton!
 
     // MARK: - Properties
-    let categories = [(#imageLiteral(resourceName: "AllButton"),"All"),(#imageLiteral(resourceName: "ShopButton"), "Shop"), (#imageLiteral(resourceName: "FoodButton"), "Food"), (#imageLiteral(resourceName: "HotelsButton"), "Hotels"), (#imageLiteral(resourceName: "BikesButton"),  "Bikes"), (#imageLiteral(resourceName: "WaterButton"), "Water")]
+    let categories = [(#imageLiteral(resourceName: "AllButton"),"All"),(#imageLiteral(resourceName: "ShopButton"), "Shop"), (#imageLiteral(resourceName: "FoodButton"), "Food"), (#imageLiteral(resourceName: "HotelsButton"), "Hotel"), (#imageLiteral(resourceName: "BikesButton"),  "Bike"), (#imageLiteral(resourceName: "WaterButton"), "Water")]
     var selectedCity: City = .naples
     var naplesCoordinates = CLLocationCoordinate2D(latitude: 40.8663100, longitude: 14.2864100)
     var parisCoordinates = CLLocationCoordinate2D(latitude: 48.864716, longitude: 2.349014)
@@ -70,7 +70,8 @@ class BaseScreenViewController: UIViewController, CityPickerDelegate {
         checkLocationServices()
         mapView.register(PointOfInterestAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
         setupSlider()
-        getNaplesDatas()
+        getDatas(city: "paris")
+        getDatas(city: "naples")
         addAllAnnotations()
     }
 
@@ -87,14 +88,15 @@ class BaseScreenViewController: UIViewController, CityPickerDelegate {
         cityName.setTitle(name.name() + " ⌵", for: .normal)
         selectedCity = name
         setupMapCoordinate() // Update view to selected city's coordinates
+        addAllAnnotations()
     }
 
-    func getNaplesDatas() {
-        firestoreService.getCollection(url: .shop) { (shopDatas) in }
-        firestoreService.getCollection(url: .food) { (foodDatas) in }
-        firestoreService.getCollection(url: .hotel) { (hotelsDatas) in }
-        firestoreService.getCollection(url: .bike) { (bikesDatas) in }
-        firestoreService.getCollection(url: .water) { (waterDatas) in }
+    func getDatas(city: String) {
+        firestoreService.getCollection(url: .shop(city: city), cityName: city) { (shopDatas) in }
+        firestoreService.getCollection(url: .food(city: city), cityName: city) { (shopDatas) in }
+        firestoreService.getCollection(url: .hotel(city: city), cityName: city) { (shopDatas) in }
+        firestoreService.getCollection(url: .bike(city: city), cityName: city) { (shopDatas) in }
+        firestoreService.getCollection(url: .water(city: city), cityName: city) { (shopDatas) in }
     }
 
     func setupLocationManager() {
@@ -265,6 +267,8 @@ extension BaseScreenViewController {
 
         sliderViewController.handleArea.addGestureRecognizer(tapGestureRecognizer)
         sliderViewController.handleArea.addGestureRecognizer(panGestureRecognizer)
+//        sliderViewController.categoryName.addGestureRecognizer(tapGestureRecognizer)
+//        sliderViewController.categoryName.addGestureRecognizer(panGestureRecognizer)
     }
 
     @objc func handleSliderTap(recognizer:UITapGestureRecognizer) {

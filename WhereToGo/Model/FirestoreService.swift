@@ -25,7 +25,7 @@ class FirestoreService {
     }
 
     // MARK: - Methods
-    func getCollection(url: InterestCategory, completionHandler: @escaping (PointOfInterest) -> Void) {
+    func getCollection(url: InterestCategory, cityName: String, completionHandler: @escaping (PointOfInterest) -> Void) {
         let categoryRef = db.collection(url.path)
         categoryRef.getDocuments { (snapshot, error) in
             if let error = error {
@@ -43,17 +43,17 @@ class FirestoreService {
                     let categoryType: InterestCategory
                     switch category {
                     case "shop":
-                        categoryType = .shop
+                        categoryType = .shop(city: cityName)
                     case "food":
-                        categoryType = .food
+                        categoryType = .food(city: cityName)
                     case "hotel":
-                        categoryType = .hotel
+                        categoryType = .hotel(city: cityName)
                     case "water":
-                        categoryType = .water
+                        categoryType = .water(city: cityName)
                     case "bike":
-                        categoryType = .bike
+                        categoryType = .bike(city: cityName)
                     default:
-                        categoryType = .all
+                        categoryType = .all(city: cityName)
                     }
                     
                     let object = PointOfInterest(coordinate: self.coordinate, interestCategory: categoryType,
@@ -63,7 +63,6 @@ class FirestoreService {
                     self.addFetchObjectToArray(object: object) // add object to their corresponding arrays
                     completionHandler(object)
                 }
-                
             }
         }
     }

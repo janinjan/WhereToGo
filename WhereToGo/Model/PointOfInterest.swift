@@ -40,7 +40,7 @@ struct Location {
     static var waterArray = [PointOfInterest]()
 }
 
-enum City: CaseIterable {
+public enum City: CaseIterable {
     case naples, paris
 
     func name() -> String {
@@ -53,30 +53,30 @@ enum City: CaseIterable {
     }
 }
 
-public enum InterestCategory: String {
-    case all
-    case shop
-    case food
-    case hotel
-    case bike
-    case water
+public enum InterestCategory {
+    case all(city: String)
+    case shop(city: String)
+    case food(city: String)
+    case hotel(city: String)
+    case bike(city: String)
+    case water(city: String)
 }
 
 extension InterestCategory {
     var path: String {
         switch self {
-        case .all:
-            return "/naples/category"
-        case .shop:
-            return "/naples/category/shop"
-        case .food:
-            return "/naples/category/food"
-        case .hotel:
-            return "/naples/category/hotel"
-        case .bike:
-            return "/naples/category/bike"
-        case .water:
-            return "/naples/category/water"
+        case .all(let city):
+            return "/\(city)/category"
+        case .shop(let city):
+            return "/\(city)/category/shop"
+        case .food(let city):
+            return "/\(city)/category/food"
+        case .hotel(let city):
+            return "/\(city)/category/hotel"
+        case .bike(let city):
+            return "/\(city)/category/bike"
+        case .water(let city):
+            return "/\(city)/category/water"
         }
     }
 }
