@@ -14,6 +14,7 @@ target 'WhereToGo' do
   target 'WhereToGoTests' do
     inherit! :search_paths
     # Pods for testing
+  pod 'Firebase/Firestore'
   end
 
 end
