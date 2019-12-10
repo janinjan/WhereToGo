@@ -14,7 +14,7 @@ class SliderViewController: UIViewController {
     @IBOutlet weak var categoryName: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var handleArea: UIView!
-    var myParent: BaseScreenViewController!
+    var myParent: BaseScreenViewController?
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -12,7 +12,7 @@ import CoreLocation
 
 class FirestoreService {
     // MARK: - Properties
-    let db: Firestore!
+    let db: Firestore?
     var coordinate = CLLocationCoordinate2D()
 
     // MARK: - Init
@@ -25,21 +25,23 @@ class FirestoreService {
     }
 
     // MARK: - Methods
-    func getCollection(url: InterestCategory, cityName: String, completionHandler: @escaping (PointOfInterest) -> Void) {
-        let categoryRef = db.collection(url.path)
+    func getCollection(url: InterestCategory, cityName: String) {
+        let path = db?.collection(url.path)
+        guard let categoryRef = path else { return }
         categoryRef.getDocuments { (snapshot, error) in
             if let error = error {
                 print("\(error)")
             } else {
-                for document in snapshot!.documents {
+                guard let snapshot = snapshot else { return }
+                for document in snapshot.documents {
                     if let geopoint = document.get("coordinate") {
                         self.convertGepointInCoordinate(geopoint: geopoint) // convert geopoint in coordinate
                     }
-                    let title = document.get("title")
-                    let address = document.get("address")
-                    let website = document.get("website")
-                    let phoneNumber = document.get("phoneNumber")
-                    let category = document.get("category") as? String
+                    guard let title = document.get("title") as? String else { return }
+                    guard let address = document.get("address") as? String else { return }
+                    guard let website = document.get("website") as? String else { return }
+                    guard let phoneNumber = document.get("phoneNumber") as? String else { return }
+                    guard let category = document.get("category") as? String else { return }
                     let categoryType: InterestCategory
                     switch category {
                     case "shop":
@@ -57,11 +59,9 @@ class FirestoreService {
                     }
                     
                     let object = PointOfInterest(coordinate: self.coordinate, interestCategory: categoryType,
-                                                 title: title as! String, address: address as! String,
-                                                 image: "", phoneNumber: phoneNumber as! String, website: website as! String)
-                    
+                                                 title: title, address: address, image: "", phoneNumber: phoneNumber, website: website)
+
                     self.addFetchObjectToArray(object: object) // add object to their corresponding arrays
-                    completionHandler(object)
                 }
             }
         }

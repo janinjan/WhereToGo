@@ -109,11 +109,11 @@ class BaseScreenViewController: UIViewController, CityPickerDelegate {
 
     // Get datas from Firebase
     func getDatas(city: String) {
-        firestoreService.getCollection(url: .shop(city: city), cityName: city) { (shopDatas) in }
-        firestoreService.getCollection(url: .food(city: city), cityName: city) { (foodDatas) in }
-        firestoreService.getCollection(url: .hotel(city: city), cityName: city) { (hotelDatas) in }
-        firestoreService.getCollection(url: .bike(city: city), cityName: city) { (bikeDatas) in }
-        firestoreService.getCollection(url: .water(city: city), cityName: city) { (waterDatas) in }
+        firestoreService.getCollection(url: .shop(city: city), cityName: city)
+        firestoreService.getCollection(url: .food(city: city), cityName: city)
+        firestoreService.getCollection(url: .hotel(city: city), cityName: city)
+        firestoreService.getCollection(url: .bike(city: city), cityName: city)
+        firestoreService.getCollection(url: .water(city: city), cityName: city)
     }
 
     private func setupLocationManager() {
