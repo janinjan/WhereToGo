@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>638251608022-5r7n1cj5e8g39hjgapnvhej8khfh2vn0.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.638251608022-5r7n1cj5e8g39hjgapnvhej8khfh2vn0</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCiV-m9TVDiAr3sRU2r_soMGSJ1Cb6nb94</string>
+	<key>GCM_SENDER_ID</key>
+	<string>638251608022</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>fr.culhaoglujanin.WhereToGo</string>
+	<key>PROJECT_ID</key>
+	<string>wheretogodatas</string>
+	<key>STORAGE_BUCKET</key>
+	<string>wheretogodatas.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:638251608022:ios:364929f1bb896b500fa677</string>
+	<key>DATABASE_URL</key>
+	<string>https://wheretogodatas.firebaseio.com</string>
+</dict>
+</plist>

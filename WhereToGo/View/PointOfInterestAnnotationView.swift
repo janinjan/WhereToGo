@@ -14,20 +14,25 @@ class PointOfInterestAnnotationView: MKMarkerAnnotationView {
     // Change the color of the annotation according to the category and add callout buttons
     override var annotation: MKAnnotation? {
         willSet {
-            if let pointOfInterest = newValue as? PointOfInterest {
-                switch pointOfInterest.interestCategory {
+            if let place = newValue as? PointOfInterest {
+                switch place.interestCategory {
                 case .all:
                     break
                 case .shop:
                     markerTintColor = UIColor.shopColor
+                    glyphImage = UIImage(named: "ShopGlyph")
                 case .food:
                     markerTintColor = UIColor.foodColor
-                case .hotels:
+                     glyphImage = UIImage(named: "FoodGlyph")
+                case .hotel:
                     markerTintColor = UIColor.hotelsColor
-                case .bikes:
+                     glyphImage = UIImage(named: "HotelGlyph")
+                case .bike:
                     markerTintColor = UIColor.bikesColor
+                     glyphImage = UIImage(named: "BikeGlyph")
                 case .water:
                     markerTintColor = UIColor.waterColor
+                     glyphImage = UIImage(named: "WaterGlyph")
                 }
             }
             canShowCallout = true
@@ -35,13 +40,12 @@ class PointOfInterestAnnotationView: MKMarkerAnnotationView {
             leftCalloutAccessoryView = setupLeftButton()
             rightCalloutAccessoryView = setupRightButton()
         }
-
     }
 
     // Create letf button for the direction
-    func setupLeftButton() -> UIButton {
+    private func setupLeftButton() -> UIButton {
         let leftButton = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
-        leftButton.setImage(UIImage(systemName: "walkingPerson"), for: .normal)
+        leftButton.setImage(UIImage(named: "walkingPerson"), for: .normal)
         leftButton.addTarget(self, action: #selector(gps), for: .touchUpInside)
         return leftButton
     }
@@ -52,11 +56,12 @@ class PointOfInterestAnnotationView: MKMarkerAnnotationView {
         let placemark = MKPlacemark(coordinate: annotation.coordinate)
         let options = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeWalking]
         let map = MKMapItem(placemark: placemark)
+        map.name = annotation.title
         map.openInMaps(launchOptions: options)
     }
-    
+
     // Create right button for information
-    func setupRightButton() -> UIButton {
+    private func setupRightButton() -> UIButton {
         let rightButton = UIButton(type: .detailDisclosure)
         rightButton.addTarget(self, action: #selector(displayInfo), for: .touchUpInside)
         return rightButton
