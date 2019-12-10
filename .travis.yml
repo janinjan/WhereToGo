@@ -1,5 +1,0 @@
-language: swift
-osx_image: xcode11.2
-xcode_project: WhereToGo.xcodeproj
-xcode_scheme: WhereToGo
-xcode_destination: platform=iOS Simulator,name=iPhone 11
