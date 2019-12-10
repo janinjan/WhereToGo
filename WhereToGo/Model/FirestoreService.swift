@@ -12,7 +12,7 @@ import CoreLocation
 
 class FirestoreService {
     // MARK: - Properties
-    var db: Firestore!
+    let db: Firestore!
     var coordinate = CLLocationCoordinate2D()
 
     // MARK: - Init

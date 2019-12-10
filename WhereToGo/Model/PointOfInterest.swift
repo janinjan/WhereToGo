@@ -11,13 +11,13 @@ import MapKit
 
 class PointOfInterest: NSObject, MKAnnotation {
     // MARK: - Properties
-    var coordinate: CLLocationCoordinate2D
+    let coordinate: CLLocationCoordinate2D
     let interestCategory: InterestCategory
     let title: String?
-    var address: String?
-    var image: String?
-    var phoneNumber: String?
-    var website: String?
+    let address: String?
+    let image: String?
+    let phoneNumber: String?
+    let website: String?
 
     // MARK: - Init
     init(coordinate: CLLocationCoordinate2D, interestCategory: InterestCategory,

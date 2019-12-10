@@ -12,6 +12,8 @@
 		3D14DF75239C7F600004F0E0 /* FirebaseFirestore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D14DF74239C7F600004F0E0 /* FirebaseFirestore.framework */; };
 		3D14DF77239C7F9E0004F0E0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D14DF76239C7F9E0004F0E0 /* GoogleService-Info.plist */; };
 		3D2BE471239051D800AF7E39 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D2BE470239051D700AF7E39 /* MapKit.framework */; };
+		3D83C783239EEDCE00892B00 /* DiscoverCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D83C782239EEDCE00892B00 /* DiscoverCollectionViewCell.swift */; };
+		3D83C789239F280600892B00 /* BaseScreenViewController+extensionSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D83C788239F280600892B00 /* BaseScreenViewController+extensionSliderView.swift */; };
 		3DCA743623933A4F009A2CE3 /* SliderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCA743523933A4F009A2CE3 /* SliderViewController.swift */; };
 		3DE438AC238DDA39005051C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE438AB238DDA39005051C4 /* AppDelegate.swift */; };
 		3DE438AE238DDA39005051C4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE438AD238DDA39005051C4 /* SceneDelegate.swift */; };
@@ -47,6 +49,8 @@
 		3D14DF74239C7F600004F0E0 /* FirebaseFirestore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseFirestore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D14DF76239C7F9E0004F0E0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3D2BE470239051D700AF7E39 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		3D83C782239EEDCE00892B00 /* DiscoverCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionViewCell.swift; sourceTree = "<group>"; };
+		3D83C788239F280600892B00 /* BaseScreenViewController+extensionSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseScreenViewController+extensionSliderView.swift"; sourceTree = "<group>"; };
 		3DCA743523933A4F009A2CE3 /* SliderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderViewController.swift; sourceTree = "<group>"; };
 		3DE438A8238DDA39005051C4 /* WhereToGo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhereToGo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DE438AB238DDA39005051C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -173,6 +177,7 @@
 				3DE438B6238DDA3A005051C4 /* LaunchScreen.storyboard */,
 				3DE438D9238F48F2005051C4 /* CategoryCollectionViewCell.swift */,
 				3DF1BCAC239323810084478C /* PointOfInterestAnnotationView.swift */,
+				3D83C782239EEDCE00892B00 /* DiscoverCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -184,6 +189,7 @@
 				3DE438DB238F5CF0005051C4 /* CitiesViewController.swift */,
 				3DE438DD238F67A2005051C4 /* FavoritesViewController.swift */,
 				3DCA743523933A4F009A2CE3 /* SliderViewController.swift */,
+				3D83C788239F280600892B00 /* BaseScreenViewController+extensionSliderView.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -401,9 +407,11 @@
 				3DE438DA238F48F2005051C4 /* CategoryCollectionViewCell.swift in Sources */,
 				3DF1BCA92393166E0084478C /* UIColor.swift in Sources */,
 				3DF1BCAD239323810084478C /* PointOfInterestAnnotationView.swift in Sources */,
+				3D83C789239F280600892B00 /* BaseScreenViewController+extensionSliderView.swift in Sources */,
 				3DF1BCAF239330B40084478C /* UIViewController.swift in Sources */,
 				3DE438DC238F5CF0005051C4 /* CitiesViewController.swift in Sources */,
 				3DE438AC238DDA39005051C4 /* AppDelegate.swift in Sources */,
+				3D83C783239EEDCE00892B00 /* DiscoverCollectionViewCell.swift in Sources */,
 				3DCA743623933A4F009A2CE3 /* SliderViewController.swift in Sources */,
 				3DE438D8238DEA8D005051C4 /* BaseScreenViewController.swift in Sources */,
 				3DE438DE238F67A2005051C4 /* FavoritesViewController.swift in Sources */,

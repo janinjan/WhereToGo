@@ -216,10 +216,10 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="95"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HTd-bw-kFo">
-                                        <rect key="frame" x="182" y="15" width="50" height="6"/>
+                                        <rect key="frame" x="162" y="15" width="90" height="6"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="9Ml-Q4-MRj"/>
+                                            <constraint firstAttribute="width" constant="90" id="9Ml-Q4-MRj"/>
                                             <constraint firstAttribute="height" constant="6" id="GQG-Qd-NRH"/>
                                         </constraints>
                                     </view>
@@ -254,7 +254,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="10" maxX="0.0" maxY="10"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="categoryCell" id="Vz2-cl-KGa">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="categoryCell" id="Vz2-cl-KGa" customClass="DiscoverCollectionViewCell" customModule="WhereToGo" customModuleProvider="target">
                                         <rect key="frame" x="17" y="10" width="380" height="258"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -313,6 +313,9 @@
                                             <constraint firstItem="3Wa-9F-Zsy" firstAttribute="top" secondItem="Vz2-cl-KGa" secondAttribute="top" constant="10" id="y4A-aa-y5k"/>
                                         </constraints>
                                         <size key="customSize" width="380" height="258"/>
+                                        <connections>
+                                            <outlet property="placesImage" destination="3Wa-9F-Zsy" id="CZY-ex-XRY"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>

@@ -10,6 +10,7 @@ import UIKit
 
 class SliderViewController: UIViewController {
 
+    // MARK: - Outlets
     @IBOutlet weak var categoryName: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var handleArea: UIView!
@@ -21,13 +22,16 @@ class SliderViewController: UIViewController {
     }
 }
 
+// =========================================
+// MARK: - CollectionView Datasource
+// =========================================
 extension SliderViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 3
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoryCell", for: indexPath)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoryCell", for: indexPath) as? DiscoverCollectionViewCell else { return UICollectionViewCell() }
         return cell
     }
 }

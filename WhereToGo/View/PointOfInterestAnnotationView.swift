@@ -43,7 +43,7 @@ class PointOfInterestAnnotationView: MKMarkerAnnotationView {
     }
 
     // Create letf button for the direction
-    func setupLeftButton() -> UIButton {
+    private func setupLeftButton() -> UIButton {
         let leftButton = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         leftButton.setImage(UIImage(named: "walkingPerson"), for: .normal)
         leftButton.addTarget(self, action: #selector(gps), for: .touchUpInside)
@@ -61,7 +61,7 @@ class PointOfInterestAnnotationView: MKMarkerAnnotationView {
     }
 
     // Create right button for information
-    func setupRightButton() -> UIButton {
+    private func setupRightButton() -> UIButton {
         let rightButton = UIButton(type: .detailDisclosure)
         rightButton.addTarget(self, action: #selector(displayInfo), for: .touchUpInside)
         return rightButton

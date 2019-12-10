@@ -25,10 +25,9 @@ class BaseScreenViewController: UIViewController, CityPickerDelegate {
     // MARK: - Properties
     let categories = [(#imageLiteral(resourceName: "AllButton"),"All"),(#imageLiteral(resourceName: "ShopButton"), "Shop"), (#imageLiteral(resourceName: "FoodButton"), "Food"), (#imageLiteral(resourceName: "HotelsButton"), "Hotel"), (#imageLiteral(resourceName: "BikesButton"),  "Bike"), (#imageLiteral(resourceName: "WaterButton"), "Water")]
     var selectedCity: City = .naples
-    var naplesCoordinates = CLLocationCoordinate2D(latitude: 40.8663100, longitude: 14.2864100)
-    var parisCoordinates = CLLocationCoordinate2D(latitude: 48.864716, longitude: 2.349014)
-
-    let firestoreService = FirestoreService()
+    let locationManager = CLLocationManager() // get a location manager reference
+    let naplesCoordinates = CLLocationCoordinate2D(latitude: 40.8663100, longitude: 14.2864100)
+    let parisCoordinates = CLLocationCoordinate2D(latitude: 48.864716, longitude: 2.349014)
 
     var coordinateInit: CLLocationCoordinate2D {
         switch selectedCity {
@@ -39,19 +38,25 @@ class BaseScreenViewController: UIViewController, CityPickerDelegate {
         }
     }
 
-    let locationManager = CLLocationManager() // get a location manager reference
+    var userLat: Double = 0.0
+    var userLong: Double = 0.0
+    var usersCity = ""
+
+    let segueIdentifier = "BaseToCities"
+
+    let firestoreService = FirestoreService()
 
     // MARK: - Actions
     @IBAction func didTapChangeCity(_ sender: UIButton) {
-        performSegue(withIdentifier: "BaseToCities", sender: self)
+        performSegue(withIdentifier: segueIdentifier, sender: self)
     }
 
     // MARK: - Properties (Slider)
     var sliderViewController: SliderViewController!
     var visualEffectView: UIVisualEffectView!
     let screenSize: CGRect = UIScreen.main.bounds
-    var sliderRatio: CGFloat = 0.9
-    var sliderHandleAreaRatio: CGFloat = 0.35
+    let sliderRatio: CGFloat = 0.9
+    let sliderHandleAreaRatio: CGFloat = 0.35
     var sliderHeight: CGFloat = 500
     var sliderHandleAreaHeight: CGFloat = 120
     var sliderVisible = false
@@ -77,7 +82,7 @@ class BaseScreenViewController: UIViewController, CityPickerDelegate {
 
     // MARK: - Segue to Cities TableView
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "BaseToCities" {
+        if segue.identifier == segueIdentifier {
             guard let tableVC = segue.destination as? CitiesViewController else { return }
             tableVC.delegate = self
         }
@@ -87,24 +92,36 @@ class BaseScreenViewController: UIViewController, CityPickerDelegate {
     func changeCity(name: City) {
         cityName.setTitle(name.name() + " ⌵", for: .normal)
         selectedCity = name
-        setupMapCoordinate() // Update view to selected city's coordinates
         addAllAnnotations()
+        setupMapCoordinate() // Update view to selected city's coordinates
     }
 
+    // Retreive user's city name with geocoder
+    private func retreiveCityName(latitude: Double, longitude: Double) {
+        let geocoder = CLGeocoder()
+        geocoder.reverseGeocodeLocation(CLLocation(latitude: latitude, longitude: longitude)) { (placemark, error) in
+            if let placemark = placemark?.first {
+                guard let cityName = placemark.locality else { return }
+                self.usersCity = cityName
+            }
+        }
+    }
+
+    // Get datas from Firebase
     func getDatas(city: String) {
         firestoreService.getCollection(url: .shop(city: city), cityName: city) { (shopDatas) in }
-        firestoreService.getCollection(url: .food(city: city), cityName: city) { (shopDatas) in }
-        firestoreService.getCollection(url: .hotel(city: city), cityName: city) { (shopDatas) in }
-        firestoreService.getCollection(url: .bike(city: city), cityName: city) { (shopDatas) in }
-        firestoreService.getCollection(url: .water(city: city), cityName: city) { (shopDatas) in }
+        firestoreService.getCollection(url: .food(city: city), cityName: city) { (foodDatas) in }
+        firestoreService.getCollection(url: .hotel(city: city), cityName: city) { (hotelDatas) in }
+        firestoreService.getCollection(url: .bike(city: city), cityName: city) { (bikeDatas) in }
+        firestoreService.getCollection(url: .water(city: city), cityName: city) { (waterDatas) in }
     }
 
-    func setupLocationManager() {
+    private func setupLocationManager() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
     }
 
-    func checkLocationAuthorization() { // Check the authorization status
+    private func checkLocationAuthorization() { // Check the authorization status
         switch CLLocationManager.authorizationStatus() {
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
@@ -125,7 +142,7 @@ class BaseScreenViewController: UIViewController, CityPickerDelegate {
         }
     }
 
-    func checkLocationServices() {
+    private func checkLocationServices() {
         if CLLocationManager.locationServicesEnabled() {
             setupLocationManager()
             checkLocationAuthorization()
@@ -159,28 +176,21 @@ extension BaseScreenViewController: UICollectionViewDelegate {
         guard let selectedCell = collectionView.cellForItem(at: indexPath) as? CategoryCollectionViewCell else { return }
         selectedCell.categoryName.textColor = .black
         selectedCell.chevronDownSymbol.tintColor = .black
+        removeAllAnnotations()
+        mapView.addAnnotations(pointsOfInterest(for: indexPath.item))
+    }
 
-        switch indexPath.item {
-        case 0: // all
-            addAllAnnotations()
-        case 1: // Shops
-            removeAllAnnotations()
-            mapView.addAnnotations(Location.shopsArray)
-        case 2: // Food
-            removeAllAnnotations()
-            mapView.addAnnotations(Location.foodArray)
-        case 3: // Hotels
-            removeAllAnnotations()
-            mapView.addAnnotations(Location.hotelsArray)
-        case 4: // Bikes
-            removeAllAnnotations()
-            mapView.addAnnotations(Location.bikesArray)
-        case 5: // Water
-            removeAllAnnotations()
-            mapView.addAnnotations(Location.waterArray)
-        default:
-            addAllAnnotations()
-        }
+    private func pointsOfInterest(for index: Int) -> [PointOfInterest] {
+        let allPoints = Location.shopsArray + Location.foodArray + Location.hotelsArray + Location.bikesArray + Location.waterArray
+        let indexAndPoint: [Int: [PointOfInterest]] = [
+            0 : allPoints,
+            1 : Location.shopsArray,
+            2 : Location.foodArray,
+            3 : Location.hotelsArray,
+            4 : Location.bikesArray,
+            5 : Location.waterArray
+        ]
+        return indexAndPoint[index] ?? allPoints
     }
 
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -210,152 +220,36 @@ extension BaseScreenViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         checkLocationAuthorization()
     }
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            self.userLat = location.coordinate.latitude
+            self.userLong = location.coordinate.longitude
+            retreiveCityName(latitude: userLat, longitude: userLong)
+        }
+    }
 }
 
 // =========================================
 // MARK: - MapKitView Delegate
 // =========================================
 extension BaseScreenViewController: MKMapViewDelegate {
-    func setupMap(coordinate: CLLocationCoordinate2D, myLatitude: Double, myLongitude: Double) {
+    private func setupMap(coordinate: CLLocationCoordinate2D, myLatitude: Double, myLongitude: Double) {
         let span = MKCoordinateSpan(latitudeDelta: myLatitude, longitudeDelta: myLongitude)
         let region = MKCoordinateRegion(center: coordinate, span: span)
         mapView.setRegion(region, animated: true)
     }
 
-    func setupMapCoordinate() {
+    private func setupMapCoordinate() {
         setupMap(coordinate: coordinateInit, myLatitude: 0.07, myLongitude: 0.07)
         mapView.delegate = self
     }
 
-    func addAllAnnotations() {
-        mapView.addAnnotations(Location.bikesArray)
-        mapView.addAnnotations(Location.hotelsArray)
-        mapView.addAnnotations(Location.shopsArray)
-        mapView.addAnnotations(Location.foodArray)
-        mapView.addAnnotations(Location.waterArray)
+    private func addAllAnnotations() { // Add all eco-friendly places in the map
+        mapView.addAnnotations(pointsOfInterest(for: 0))
     }
 
-    func removeAllAnnotations() {
-        mapView.removeAnnotations(Location.bikesArray)
-        mapView.removeAnnotations(Location.hotelsArray)
-        mapView.removeAnnotations(Location.shopsArray)
-        mapView.removeAnnotations(Location.foodArray)
-        mapView.removeAnnotations(Location.waterArray)
-    }
-}
-
-// =========================================
-// MARK: - Sliders CardVIew
-// =========================================
-extension BaseScreenViewController {
-    func setupSlider() {
-        sliderHeight = screenSize.height * sliderRatio - 110
-        sliderHandleAreaHeight = 200
-
-        visualEffectView = UIVisualEffectView()
-        self.visualEffectView.frame = self.mapView.bounds
-
-        sliderViewController = (self.storyboard?.instantiateViewController(withIdentifier: "slider") as! SliderViewController)
-        self.addChild(sliderViewController)
-        self.view.addSubview(sliderViewController.view)
-
-        sliderViewController.view.frame = CGRect(x: 0, y: self.view.frame.height - sliderHandleAreaHeight, width: self.view.bounds.width, height: sliderHeight)
-        sliderViewController.view.clipsToBounds = true
-
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(BaseScreenViewController.handleSliderTap(recognizer:)))
-        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(BaseScreenViewController.handleSliderPan(recognizer:)))
-
-        sliderViewController.handleArea.addGestureRecognizer(tapGestureRecognizer)
-        sliderViewController.handleArea.addGestureRecognizer(panGestureRecognizer)
-//        sliderViewController.categoryName.addGestureRecognizer(tapGestureRecognizer)
-//        sliderViewController.categoryName.addGestureRecognizer(panGestureRecognizer)
-    }
-
-    @objc func handleSliderTap(recognizer:UITapGestureRecognizer) {
-        switch recognizer.state {
-        case .ended:
-            startInteractiveTransition(state: nextState, duration: 0.8)
-            continueInteractiveTransition()
-        default:
-            break
-        }
-    }
-
-    @objc func handleSliderPan(recognizer:UIPanGestureRecognizer) {
-        switch recognizer.state {
-        case .began:
-            startInteractiveTransition(state: nextState, duration: 0.5)
-        case .changed:
-            let translation = recognizer.translation(in: self.sliderViewController.handleArea)
-            let fractionCompleted = translation.y / sliderHeight
-            updateInteractiveTransition(fractionCompleted: sliderVisible ? fractionCompleted : -fractionCompleted)
-        case .ended:
-            continueInteractiveTransition()
-        default:
-            break
-        }
-    }
-
-    func animateTransitionIfNeeded(state:SliderState, duration: TimeInterval) {
-        if runningAnimations.isEmpty {
-            let frameAnimator = UIViewPropertyAnimator(duration: duration, dampingRatio: 1) {
-                switch state {
-                case .expanded:
-                    self.sliderViewController.view.frame.origin.y = self.view.frame.height - self.sliderHeight
-                case .collapsed:
-                    self.sliderViewController.view.frame.origin.y = self.view.frame.height - self.sliderHandleAreaHeight
-                }
-            }
-            frameAnimator.addCompletion { _ in
-                self.sliderVisible = !self.sliderVisible
-                self.runningAnimations.removeAll()
-            }
-            frameAnimator.startAnimation()
-            self.runningAnimations.append(frameAnimator)
-
-            let blurAnimator = UIViewPropertyAnimator(duration: duration, dampingRatio: 1) {
-                switch state {
-                case .expanded:
-                    self.mapView.addSubview(self.visualEffectView)
-                    self.visualEffectView.effect = UIBlurEffect(style: .light)
-                case .collapsed:
-                    self.visualEffectView.effect = nil
-                }
-            }
-
-            blurAnimator.addCompletion {_ in
-                switch state {
-                case .expanded:
-                    break
-                case .collapsed:
-                    self.visualEffectView.removeFromSuperview()
-                }
-            }
-
-            blurAnimator.startAnimation()
-            runningAnimations.append(blurAnimator)
-        }
-    }
-
-    func startInteractiveTransition(state:SliderState, duration: TimeInterval) {
-        if runningAnimations.isEmpty {
-            animateTransitionIfNeeded(state: state, duration: duration)
-        }
-        for animator in runningAnimations {
-            animator.pauseAnimation()
-            animationProgressWhenInterrupted = animator.fractionComplete
-        }
-    }
-
-    func updateInteractiveTransition(fractionCompleted: CGFloat) {
-        for animator in runningAnimations {
-            animator.fractionComplete = fractionCompleted + animationProgressWhenInterrupted
-        }
-    }
-
-    func continueInteractiveTransition () {
-        for animator in runningAnimations {
-            animator.continueAnimation(withTimingParameters: nil, durationFactor: 0)
-        }
+    private func removeAllAnnotations() {
+        mapView.removeAnnotations(pointsOfInterest(for: 0))
     }
 }
