@@ -41,6 +41,7 @@ class BaseScreenViewController: UIViewController, CityPickerDelegate {
     var userLat: Double = 0.0
     var userLong: Double = 0.0
     var usersCity = ""
+    var currentPlace: [String: Any] = [:]
 
     let segueIdentifier = "BaseToCities"
 
@@ -78,6 +79,17 @@ class BaseScreenViewController: UIViewController, CityPickerDelegate {
         getDatas(city: "paris")
         getDatas(city: "naples")
         addAllAnnotations()
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveData(_:)), name: Notification.Name("didReceiveData"), object: nil)
+    }
+
+    @objc func onDidReceiveData(_ notification: Notification) {
+        guard let selectedPlaceInfo = notification.object as? [String: Any] else { return }
+        self.currentPlace = selectedPlaceInfo
+
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let newsliderViewController = (storyboard.instantiateViewController(withIdentifier: "infoPlace") as? DetailsViewController) else { return }
+        newsliderViewController.curentPlace = currentPlace // pass data to detailVC
+        self.navigationController?.pushViewController(newsliderViewController, animated: true)
     }
 
     // MARK: - Segue to Cities TableView
@@ -178,6 +190,9 @@ extension BaseScreenViewController: UICollectionViewDelegate {
         selectedCell.chevronDownSymbol.tintColor = .black
         removeAllAnnotations()
         mapView.addAnnotations(pointsOfInterest(for: indexPath.item))
+        if sliderVisible { // collapsed the cardView if a category is selected
+            animateTransitionIfNeeded(state: .collapsed, duration: 1)
+        }
     }
 
     private func pointsOfInterest(for index: Int) -> [PointOfInterest] {

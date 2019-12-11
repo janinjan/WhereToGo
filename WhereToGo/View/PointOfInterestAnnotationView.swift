@@ -63,11 +63,25 @@ class PointOfInterestAnnotationView: MKMarkerAnnotationView {
     // Create right button for information
     private func setupRightButton() -> UIButton {
         let rightButton = UIButton(type: .detailDisclosure)
-        rightButton.addTarget(self, action: #selector(displayInfo), for: .touchUpInside)
+        rightButton.addTarget(self, action: #selector(displayInfoTapped), for: .touchUpInside)
         return rightButton
     }
 
-    @objc func displayInfo() {
-        // To do
+    @objc func displayInfoTapped() {
+        retrieveSelectedPlaceInfos()
+    }
+
+    func retrieveSelectedPlaceInfos() {
+        guard let annotation = annotation as? PointOfInterest else { return }
+        guard let title = annotation.title else { return }
+        let coordinate = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
+        guard let address = annotation.address else { return }
+        guard let website = annotation.website else { return }
+        guard let image = annotation.image else { return }
+        guard let phoneNumber = annotation.phoneNumber else { return }
+        
+        let selectedPlaceInfo: [String: Any] = ["title": title, "coordinate": coordinate, "address": address, "image": image, "phoneNumber": phoneNumber, "website": website]
+        
+        NotificationCenter.default.post(name: Notification.Name("didReceiveData"), object: selectedPlaceInfo)
     }
 }

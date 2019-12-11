@@ -42,6 +42,7 @@ class FirestoreService {
                     guard let website = document.get("website") as? String else { return }
                     guard let phoneNumber = document.get("phoneNumber") as? String else { return }
                     guard let category = document.get("category") as? String else { return }
+                    guard let image = document.get("image") as? String else { return }
                     let categoryType: InterestCategory
                     switch category {
                     case "shop":
@@ -59,8 +60,8 @@ class FirestoreService {
                     }
                     
                     let object = PointOfInterest(coordinate: self.coordinate, interestCategory: categoryType,
-                                                 title: title, address: address, image: "", phoneNumber: phoneNumber, website: website)
-
+                                                 title: title, address: address, image: image, phoneNumber: phoneNumber, website: website)
+                    
                     self.addFetchObjectToArray(object: object) // add object to their corresponding arrays
                 }
             }

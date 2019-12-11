@@ -13,11 +13,17 @@ import UIKit
 // =========================================
 extension BaseScreenViewController {
     func setupSlider() {
+        self.sliderViewController?.removeFromParent()
+        self.sliderViewController?.view.removeFromSuperview()
+        self.visualEffectView?.isHidden = true
+        
         sliderHeight = screenSize.height * sliderRatio - 110
-        sliderHandleAreaHeight = 200
+//        var sliderHandleAreaHeight = 200
 
         visualEffectView = UIVisualEffectView()
         self.visualEffectView.frame = self.mapView.bounds
+        self.view.addSubview(visualEffectView)
+        visualEffectView.isHidden = true
 
         sliderViewController = (self.storyboard?.instantiateViewController(withIdentifier: "slider") as! SliderViewController)
         self.addChild(sliderViewController)
@@ -74,6 +80,19 @@ extension BaseScreenViewController {
             }
             frameAnimator.startAnimation()
             self.runningAnimations.append(frameAnimator)
+
+            let cornerRadiusAnimator = UIViewPropertyAnimator(duration: duration, curve: .linear) {
+                switch state {
+                case .expanded:
+                    self.sliderViewController.view.layer.cornerRadius = 0
+                case .collapsed:
+                    self.sliderViewController.view.layer.cornerRadius = 30
+
+                }
+            }
+
+            cornerRadiusAnimator.startAnimation()
+            runningAnimations.append(cornerRadiusAnimator)
 
             let blurAnimator = UIViewPropertyAnimator(duration: duration, dampingRatio: 1) {
                 switch state {
