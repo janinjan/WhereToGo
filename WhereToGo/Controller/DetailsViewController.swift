@@ -16,7 +16,8 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var placesAddress: UILabel!
     @IBOutlet weak var placesPhone: UILabel!
     @IBOutlet weak var websiteButton: UIButton!
-
+    @IBOutlet weak var favButton: FavoriteButton!
+    
     var myParent: BaseScreenViewController?
     var curentPlace: [String: Any] = [:]
 

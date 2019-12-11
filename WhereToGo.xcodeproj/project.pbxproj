@@ -14,6 +14,7 @@
 		3D2BE471239051D800AF7E39 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D2BE470239051D700AF7E39 /* MapKit.framework */; };
 		3D77AC3E23A13DFF00DBDACF /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D77AC3D23A13DFF00DBDACF /* DetailsViewController.swift */; };
 		3D77AC4823A18F4A00DBDACF /* InfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D77AC4723A18F4A00DBDACF /* InfoTableViewCell.swift */; };
+		3D77AC4A23A1AC4300DBDACF /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D77AC4923A1AC4300DBDACF /* FavoriteButton.swift */; };
 		3D83C789239F280600892B00 /* BaseScreenViewController+extensionSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D83C788239F280600892B00 /* BaseScreenViewController+extensionSliderView.swift */; };
 		3DCA743623933A4F009A2CE3 /* SliderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCA743523933A4F009A2CE3 /* SliderViewController.swift */; };
 		3DE438AC238DDA39005051C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE438AB238DDA39005051C4 /* AppDelegate.swift */; };
@@ -52,6 +53,7 @@
 		3D2BE470239051D700AF7E39 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		3D77AC3D23A13DFF00DBDACF /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		3D77AC4723A18F4A00DBDACF /* InfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTableViewCell.swift; sourceTree = "<group>"; };
+		3D77AC4923A1AC4300DBDACF /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
 		3D83C788239F280600892B00 /* BaseScreenViewController+extensionSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseScreenViewController+extensionSliderView.swift"; sourceTree = "<group>"; };
 		3DCA743523933A4F009A2CE3 /* SliderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderViewController.swift; sourceTree = "<group>"; };
 		3DE438A8238DDA39005051C4 /* WhereToGo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhereToGo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -122,6 +124,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		3DB3249423A1AE8600A6DB26 /* SubClasses */ = {
+			isa = PBXGroup;
+			children = (
+				3D77AC4923A1AC4300DBDACF /* FavoriteButton.swift */,
+			);
+			path = SubClasses;
+			sourceTree = "<group>";
+		};
 		3DE4389F238DDA39005051C4 = {
 			isa = PBXGroup;
 			children = (
@@ -175,6 +185,7 @@
 		3DE438D4238DE8C8005051C4 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3DB3249423A1AE8600A6DB26 /* SubClasses */,
 				3DE438B1238DDA39005051C4 /* Main.storyboard */,
 				3DE438B6238DDA3A005051C4 /* LaunchScreen.storyboard */,
 				3DE438D9238F48F2005051C4 /* CategoryCollectionViewCell.swift */,
@@ -416,6 +427,7 @@
 				3DE438DC238F5CF0005051C4 /* CitiesViewController.swift in Sources */,
 				3DE438AC238DDA39005051C4 /* AppDelegate.swift in Sources */,
 				3DCA743623933A4F009A2CE3 /* SliderViewController.swift in Sources */,
+				3D77AC4A23A1AC4300DBDACF /* FavoriteButton.swift in Sources */,
 				3DE438D8238DEA8D005051C4 /* BaseScreenViewController.swift in Sources */,
 				3D77AC3E23A13DFF00DBDACF /* DetailsViewController.swift in Sources */,
 				3DE438DE238F67A2005051C4 /* FavoritesViewController.swift in Sources */,

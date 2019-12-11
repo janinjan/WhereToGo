@@ -232,17 +232,13 @@
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GreenLeaf" translatesAutoresizingMaskIntoConstraints="NO" id="WZg-Jb-HoE">
                                                         <rect key="frame" x="0.0" y="0.0" width="36" height="36"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="36" id="M3C-a6-GwW"/>
+                                                            <constraint firstAttribute="height" constant="36" id="b3H-Fv-cdj"/>
                                                             <constraint firstAttribute="width" secondItem="WZg-Jb-HoE" secondAttribute="height" multiplier="1:1" id="hsJ-cI-kuW"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Our criteria for eco-friendly places" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e4S-VI-C95">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Our criteria for eco-friendly places" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="e4S-VI-C95">
                                                         <rect key="frame" x="48" y="0.0" width="326" height="36"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="36" id="St6-xa-6eI"/>
-                                                            <constraint firstAttribute="height" constant="36" id="y7i-uX-QAM"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -268,7 +264,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="394" height="120"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Our criteria for restaurants and hotels are based on the EU Ecolabel and the Global Sustainable Tourism Council’s Criteria:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x0i-WA-2es">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Our criteria for restaurants and hotels are based on the EU Ecolabel and the Global Sustainable Tourism Council’s Criteria:" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x0i-WA-2es">
                                             <rect key="frame" x="19" y="0.0" width="356" height="101"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -460,8 +456,8 @@
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t5d-o0-Xwf" customClass="FavoriteButton" customModule="Reciplease" customModuleProvider="target">
-                                        <rect key="frame" x="344" y="0.0" width="50" height="50"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t5d-o0-Xwf" customClass="FavoriteButton" customModule="WhereToGo" customModuleProvider="target">
+                                        <rect key="frame" x="344" y="15" width="50" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="51n-sl-8Xa"/>
                                             <constraint firstAttribute="width" secondItem="t5d-o0-Xwf" secondAttribute="height" multiplier="1:1" id="Wg2-3K-2Nl"/>
@@ -481,7 +477,7 @@
                                     <constraint firstItem="tyX-K5-1e0" firstAttribute="leading" secondItem="i2h-Bi-OYw" secondAttribute="leading" constant="20" id="YYv-2M-9QQ"/>
                                     <constraint firstAttribute="trailing" secondItem="3O1-Ap-Ael" secondAttribute="trailing" constant="20" id="ZxY-N3-Cak"/>
                                     <constraint firstAttribute="trailing" secondItem="sIk-h3-kL2" secondAttribute="trailing" constant="20" id="dIZ-fg-M1x"/>
-                                    <constraint firstItem="t5d-o0-Xwf" firstAttribute="top" secondItem="tyX-K5-1e0" secondAttribute="top" id="dgk-4O-t2V"/>
+                                    <constraint firstItem="t5d-o0-Xwf" firstAttribute="top" secondItem="tyX-K5-1e0" secondAttribute="top" constant="15" id="dgk-4O-t2V"/>
                                     <constraint firstItem="sIk-h3-kL2" firstAttribute="top" secondItem="3O1-Ap-Ael" secondAttribute="bottom" constant="20" id="eEt-mJ-8Ac"/>
                                     <constraint firstItem="3O1-Ap-Ael" firstAttribute="leading" secondItem="i2h-Bi-OYw" secondAttribute="leading" constant="20" id="k6o-N2-gkL"/>
                                     <constraint firstAttribute="trailing" secondItem="tyX-K5-1e0" secondAttribute="trailing" constant="20" id="nZX-NE-vE7"/>
@@ -502,6 +498,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="ZsK-Y1-ZJF"/>
                     <connections>
+                        <outlet property="favButton" destination="t5d-o0-Xwf" id="ChD-YV-F2t"/>
                         <outlet property="placesAddress" destination="IJL-BS-bI2" id="raW-bw-29X"/>
                         <outlet property="placesImage" destination="tyX-K5-1e0" id="8CN-NY-xoa"/>
                         <outlet property="placesName" destination="Y4P-GU-4wA" id="sYt-7k-qmg"/>
