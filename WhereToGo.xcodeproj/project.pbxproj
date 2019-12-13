@@ -12,6 +12,10 @@
 		3D14DF75239C7F600004F0E0 /* FirebaseFirestore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D14DF74239C7F600004F0E0 /* FirebaseFirestore.framework */; };
 		3D14DF77239C7F9E0004F0E0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D14DF76239C7F9E0004F0E0 /* GoogleService-Info.plist */; };
 		3D2BE471239051D800AF7E39 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D2BE470239051D700AF7E39 /* MapKit.framework */; };
+		3D5FD6AF23A2F02600C88C73 /* WhereToGo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3D5FD6AD23A2F02600C88C73 /* WhereToGo.xcdatamodeld */; };
+		3D5FD6FB23A2F8BE00C88C73 /* EcoPlaceEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5FD6FA23A2F8BE00C88C73 /* EcoPlaceEntity.swift */; };
+		3D5FD6FD23A3038300C88C73 /* FavoritePlaceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5FD6FC23A3038300C88C73 /* FavoritePlaceCollectionViewCell.swift */; };
+		3D5FD6FF23A3FF5F00C88C73 /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5FD6FE23A3FF5F00C88C73 /* UICollectionView.swift */; };
 		3D77AC3E23A13DFF00DBDACF /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D77AC3D23A13DFF00DBDACF /* DetailsViewController.swift */; };
 		3D77AC4823A18F4A00DBDACF /* InfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D77AC4723A18F4A00DBDACF /* InfoTableViewCell.swift */; };
 		3D77AC4A23A1AC4300DBDACF /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D77AC4923A1AC4300DBDACF /* FavoriteButton.swift */; };
@@ -51,6 +55,10 @@
 		3D14DF74239C7F600004F0E0 /* FirebaseFirestore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseFirestore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D14DF76239C7F9E0004F0E0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3D2BE470239051D700AF7E39 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		3D5FD6AE23A2F02600C88C73 /* WhereToGo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WhereToGo.xcdatamodel; sourceTree = "<group>"; };
+		3D5FD6FA23A2F8BE00C88C73 /* EcoPlaceEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoPlaceEntity.swift; sourceTree = "<group>"; };
+		3D5FD6FC23A3038300C88C73 /* FavoritePlaceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePlaceCollectionViewCell.swift; sourceTree = "<group>"; };
+		3D5FD6FE23A3FF5F00C88C73 /* UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
 		3D77AC3D23A13DFF00DBDACF /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		3D77AC4723A18F4A00DBDACF /* InfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTableViewCell.swift; sourceTree = "<group>"; };
 		3D77AC4923A1AC4300DBDACF /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
@@ -178,6 +186,8 @@
 			children = (
 				3DF1BCAA239322AA0084478C /* PointOfInterest.swift */,
 				3D005DC2239C854000D74180 /* FirestoreService.swift */,
+				3D5FD6AD23A2F02600C88C73 /* WhereToGo.xcdatamodeld */,
+				3D5FD6FA23A2F8BE00C88C73 /* EcoPlaceEntity.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -191,6 +201,7 @@
 				3DE438D9238F48F2005051C4 /* CategoryCollectionViewCell.swift */,
 				3DF1BCAC239323810084478C /* PointOfInterestAnnotationView.swift */,
 				3D77AC4723A18F4A00DBDACF /* InfoTableViewCell.swift */,
+				3D5FD6FC23A3038300C88C73 /* FavoritePlaceCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -225,6 +236,7 @@
 			children = (
 				3DF1BCA82393166E0084478C /* UIColor.swift */,
 				3DF1BCAE239330B40084478C /* UIViewController.swift */,
+				3D5FD6FE23A3FF5F00C88C73 /* UICollectionView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -422,13 +434,17 @@
 				3DF1BCA92393166E0084478C /* UIColor.swift in Sources */,
 				3DF1BCAD239323810084478C /* PointOfInterestAnnotationView.swift in Sources */,
 				3D83C789239F280600892B00 /* BaseScreenViewController+extensionSliderView.swift in Sources */,
+				3D5FD6AF23A2F02600C88C73 /* WhereToGo.xcdatamodeld in Sources */,
 				3D77AC4823A18F4A00DBDACF /* InfoTableViewCell.swift in Sources */,
 				3DF1BCAF239330B40084478C /* UIViewController.swift in Sources */,
 				3DE438DC238F5CF0005051C4 /* CitiesViewController.swift in Sources */,
+				3D5FD6FF23A3FF5F00C88C73 /* UICollectionView.swift in Sources */,
 				3DE438AC238DDA39005051C4 /* AppDelegate.swift in Sources */,
 				3DCA743623933A4F009A2CE3 /* SliderViewController.swift in Sources */,
 				3D77AC4A23A1AC4300DBDACF /* FavoriteButton.swift in Sources */,
+				3D5FD6FD23A3038300C88C73 /* FavoritePlaceCollectionViewCell.swift in Sources */,
 				3DE438D8238DEA8D005051C4 /* BaseScreenViewController.swift in Sources */,
+				3D5FD6FB23A2F8BE00C88C73 /* EcoPlaceEntity.swift in Sources */,
 				3D77AC3E23A13DFF00DBDACF /* DetailsViewController.swift in Sources */,
 				3DE438DE238F67A2005051C4 /* FavoritesViewController.swift in Sources */,
 				3DE438AE238DDA39005051C4 /* SceneDelegate.swift in Sources */,
@@ -708,6 +724,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		3D5FD6AD23A2F02600C88C73 /* WhereToGo.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3D5FD6AE23A2F02600C88C73 /* WhereToGo.xcdatamodel */,
+			);
+			currentVersion = 3D5FD6AE23A2F02600C88C73 /* WhereToGo.xcdatamodel */;
+			path = WhereToGo.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 3DE438A0238DDA39005051C4 /* Project object */;
 }

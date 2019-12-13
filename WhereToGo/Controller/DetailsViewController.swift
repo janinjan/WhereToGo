@@ -17,20 +17,31 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var placesPhone: UILabel!
     @IBOutlet weak var websiteButton: UIButton!
     @IBOutlet weak var favButton: FavoriteButton!
-    
-    var myParent: BaseScreenViewController?
+
+    // MARK: - Properties
+    private var myParent: BaseScreenViewController?
     var curentPlace: [String: Any] = [:]
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if EcoPlaceEntity.placeAlreadyInFavorite(name: (curentPlace["title"] as? String)!) {
+            favButton.activateButton(bool: true)
+        }
         getAndDisplayCurrentPlaceInfo()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        addShadows(to: placesImage)
-        websiteButton.layer.cornerRadius = 5
+        setupUI()
         myParent = self.parent as? BaseScreenViewController
+    }
+
+    @IBAction func didTapFavorite(_ sender: Any) {
+        if favButton.isOn {
+            EcoPlaceEntity.addPlaceToFavorite(ecoPlace: curentPlace)
+        } else {
+            EcoPlaceEntity.delete(names: [(curentPlace["title"] as? String)!])
+        }
     }
 
     @IBAction func didTapWebsite(_ sender: UIButton) {
@@ -39,11 +50,17 @@ class DetailsViewController: UIViewController {
         UIApplication.shared.open(url) // Open the place's website in Safari
     }
 
-    func getAndDisplayCurrentPlaceInfo() {
+    private func setupUI() {
+        addShadows(to: placesImage)
+        websiteButton.layer.cornerRadius = 5
+    }
+
+    private func getAndDisplayCurrentPlaceInfo() {
         guard let title = curentPlace["title"] as? String else { return }
         guard let address = curentPlace["address"]  as? String else { return }
         guard let phoneNumber = curentPlace["phoneNumber"]  as? String else { return }
         guard let imagePlaceUrl = curentPlace["image"]  as? String else { return }
+
         convertUrlToImage(imagePlaceUrl)
         // Display Informations
         placesName.text = title

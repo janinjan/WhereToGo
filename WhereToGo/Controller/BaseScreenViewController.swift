@@ -24,7 +24,7 @@ class BaseScreenViewController: UIViewController, CityPickerDelegate {
 
     // MARK: - Properties
     let categories = [(#imageLiteral(resourceName: "AllButton"),"All"),(#imageLiteral(resourceName: "ShopButton"), "Shop"), (#imageLiteral(resourceName: "FoodButton"), "Food"), (#imageLiteral(resourceName: "HotelsButton"), "Hotel"), (#imageLiteral(resourceName: "BikesButton"),  "Bike"), (#imageLiteral(resourceName: "WaterButton"), "Water")]
-    var selectedCity: City = .naples
+    private var selectedCity: City = .naples
     let locationManager = CLLocationManager() // get a location manager reference
     let naplesCoordinates = CLLocationCoordinate2D(latitude: 40.8663100, longitude: 14.2864100)
     let parisCoordinates = CLLocationCoordinate2D(latitude: 48.864716, longitude: 2.349014)
@@ -89,7 +89,7 @@ class BaseScreenViewController: UIViewController, CityPickerDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let newsliderViewController = (storyboard.instantiateViewController(withIdentifier: "infoPlace") as? DetailsViewController) else { return }
         newsliderViewController.curentPlace = currentPlace // pass data to detailVC
-        self.navigationController?.pushViewController(newsliderViewController, animated: true)
+        navigationController?.pushViewController(newsliderViewController, animated: true)
     }
 
     // MARK: - Segue to Cities TableView
@@ -120,7 +120,7 @@ class BaseScreenViewController: UIViewController, CityPickerDelegate {
     }
 
     // Get datas from Firebase
-    func getDatas(city: String) {
+    private func getDatas(city: String) {
         firestoreService.getCollection(url: .shop(city: city), cityName: city)
         firestoreService.getCollection(url: .food(city: city), cityName: city)
         firestoreService.getCollection(url: .hotel(city: city), cityName: city)

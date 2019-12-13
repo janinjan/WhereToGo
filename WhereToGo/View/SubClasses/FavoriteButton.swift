@@ -45,7 +45,7 @@ class FavoriteButton: UIButton {
 
         let bgColor = bool ? UIColor.white : .clear // round background color is white when selected
         let title = bool ? "♥︎" : "♡" // filled heart when selected
-        let titleColor = bool ? UIColor.shopColor : .white
+        let titleColor = bool ? UIColor.orangeRed : .white
 
         setTitle(title, for: .normal)
         setTitleColor(titleColor, for: .normal)
