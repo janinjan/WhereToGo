@@ -20,19 +20,19 @@ class PointOfInterestAnnotationView: MKMarkerAnnotationView {
                     break
                 case .shop:
                     markerTintColor = UIColor.shopColor
-                    glyphImage = UIImage(named: "ShopGlyph")
+                    glyphImage = UIImage(named: "ShopGlyphSmall")
                 case .food:
                     markerTintColor = UIColor.foodColor
-                     glyphImage = UIImage(named: "FoodGlyph")
+                    glyphImage = UIImage(named: "FoodGlyph")
                 case .hotel:
                     markerTintColor = UIColor.hotelsColor
-                     glyphImage = UIImage(named: "HotelGlyph")
+                    glyphImage = UIImage(named: "HotelGlyph")
                 case .bike:
                     markerTintColor = UIColor.bikesColor
-                     glyphImage = UIImage(named: "BikeGlyph")
+                    glyphImage = UIImage(named: "BikeGlyph")
                 case .water:
                     markerTintColor = UIColor.waterColor
-                     glyphImage = UIImage(named: "WaterGlyph")
+                    glyphImage = UIImage(named: "WaterGlyph")
                 }
             }
             canShowCallout = true
@@ -79,9 +79,10 @@ class PointOfInterestAnnotationView: MKMarkerAnnotationView {
         guard let website = annotation.website else { return }
         guard let image = annotation.image else { return }
         guard let phoneNumber = annotation.phoneNumber else { return }
-        
-        let selectedPlaceInfo: [String: Any] = ["title": title, "coordinate": coordinate, "address": address, "image": image, "phoneNumber": phoneNumber, "website": website]
-        
+        let interestCategory = annotation.interestCategory
+
+        let selectedPlaceInfo: [String: Any] = ["title": title, "latCoordinate": coordinate.coordinate.latitude, "longCoordinate": coordinate.coordinate.longitude, "address": address, "image": image, "phoneNumber": phoneNumber, "interestCategory": interestCategory, "website": website]
+
         NotificationCenter.default.post(name: Notification.Name("didReceiveData"), object: selectedPlaceInfo)
     }
 }
