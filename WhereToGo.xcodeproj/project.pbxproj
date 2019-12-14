@@ -12,6 +12,7 @@
 		3D14DF75239C7F600004F0E0 /* FirebaseFirestore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D14DF74239C7F600004F0E0 /* FirebaseFirestore.framework */; };
 		3D14DF77239C7F9E0004F0E0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D14DF76239C7F9E0004F0E0 /* GoogleService-Info.plist */; };
 		3D2BE471239051D800AF7E39 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D2BE470239051D700AF7E39 /* MapKit.framework */; };
+		3D55DF4A23A46747008A9DD2 /* CoredataWithMockContainerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D55DF4923A46747008A9DD2 /* CoredataWithMockContainerTests.swift */; };
 		3D5FD6AF23A2F02600C88C73 /* WhereToGo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3D5FD6AD23A2F02600C88C73 /* WhereToGo.xcdatamodeld */; };
 		3D5FD6FB23A2F8BE00C88C73 /* EcoPlaceEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5FD6FA23A2F8BE00C88C73 /* EcoPlaceEntity.swift */; };
 		3D5FD6FD23A3038300C88C73 /* FavoritePlaceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5FD6FC23A3038300C88C73 /* FavoritePlaceCollectionViewCell.swift */; };
@@ -26,7 +27,6 @@
 		3DE438B3238DDA39005051C4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DE438B1238DDA39005051C4 /* Main.storyboard */; };
 		3DE438B5238DDA3A005051C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DE438B4238DDA3A005051C4 /* Assets.xcassets */; };
 		3DE438B8238DDA3A005051C4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DE438B6238DDA3A005051C4 /* LaunchScreen.storyboard */; };
-		3DE438C3238DDA3A005051C4 /* WhereToGoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE438C2238DDA3A005051C4 /* WhereToGoTests.swift */; };
 		3DE438D8238DEA8D005051C4 /* BaseScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE438D7238DEA8D005051C4 /* BaseScreenViewController.swift */; };
 		3DE438DA238F48F2005051C4 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE438D9238F48F2005051C4 /* CategoryCollectionViewCell.swift */; };
 		3DE438DC238F5CF0005051C4 /* CitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE438DB238F5CF0005051C4 /* CitiesViewController.swift */; };
@@ -55,6 +55,7 @@
 		3D14DF74239C7F600004F0E0 /* FirebaseFirestore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseFirestore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D14DF76239C7F9E0004F0E0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3D2BE470239051D700AF7E39 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		3D55DF4923A46747008A9DD2 /* CoredataWithMockContainerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoredataWithMockContainerTests.swift; sourceTree = "<group>"; };
 		3D5FD6AE23A2F02600C88C73 /* WhereToGo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WhereToGo.xcdatamodel; sourceTree = "<group>"; };
 		3D5FD6FA23A2F8BE00C88C73 /* EcoPlaceEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoPlaceEntity.swift; sourceTree = "<group>"; };
 		3D5FD6FC23A3038300C88C73 /* FavoritePlaceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePlaceCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -72,7 +73,6 @@
 		3DE438B7238DDA3A005051C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3DE438B9238DDA3A005051C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3DE438BE238DDA3A005051C4 /* WhereToGoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WhereToGoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3DE438C2238DDA3A005051C4 /* WhereToGoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhereToGoTests.swift; sourceTree = "<group>"; };
 		3DE438C4238DDA3A005051C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3DE438D7238DEA8D005051C4 /* BaseScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseScreenViewController.swift; sourceTree = "<group>"; };
 		3DE438D9238F48F2005051C4 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -132,6 +132,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		3D55DF4823A466F6008A9DD2 /* CoreDataTests */ = {
+			isa = PBXGroup;
+			children = (
+				3D55DF4923A46747008A9DD2 /* CoredataWithMockContainerTests.swift */,
+			);
+			path = CoreDataTests;
+			sourceTree = "<group>";
+		};
 		3DB3249423A1AE8600A6DB26 /* SubClasses */ = {
 			isa = PBXGroup;
 			children = (
@@ -175,7 +183,7 @@
 		3DE438C1238DDA3A005051C4 /* WhereToGoTests */ = {
 			isa = PBXGroup;
 			children = (
-				3DE438C2238DDA3A005051C4 /* WhereToGoTests.swift */,
+				3D55DF4823A466F6008A9DD2 /* CoreDataTests */,
 				3DE438C4238DDA3A005051C4 /* Info.plist */,
 			);
 			path = WhereToGoTests;
@@ -298,6 +306,7 @@
 					};
 					3DE438BD238DDA3A005051C4 = {
 						CreatedOnToolsVersion = 11.2.1;
+						LastSwiftMigration = 1120;
 						TestTargetID = 3DE438A7238DDA39005051C4;
 					};
 				};
@@ -455,7 +464,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3DE438C3238DDA3A005051C4 /* WhereToGoTests.swift in Sources */,
+				3D55DF4A23A46747008A9DD2 /* CoredataWithMockContainerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -653,6 +662,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P6FCPFN549;
 				INFOPLIST_FILE = WhereToGoTests/Info.plist;
@@ -664,6 +674,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = fr.culhaoglujanin.WhereToGoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WhereToGo.app/WhereToGo";
@@ -676,6 +687,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P6FCPFN549;
 				INFOPLIST_FILE = WhereToGoTests/Info.plist;
