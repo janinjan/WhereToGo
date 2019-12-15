@@ -60,12 +60,16 @@ class DetailsViewController: UIViewController {
         guard let address = curentPlace["address"]  as? String else { return }
         guard let phoneNumber = curentPlace["phoneNumber"]  as? String else { return }
         guard let imagePlaceUrl = curentPlace["image"]  as? String else { return }
+        guard let website = curentPlace["website"] as? String else { return }
 
         convertUrlToImage(imagePlaceUrl)
         // Display Informations
         placesName.text = title
         placesAddress.text = address
         placesPhone.text = phoneNumber
+        if website.isEmpty {
+            websiteButton.isHidden = true
+        }
     }
 
     /// Convert String URL to UIImage
