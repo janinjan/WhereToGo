@@ -46,13 +46,6 @@ class CoredataWithMockContainerTests: XCTestCase {
 
     // MARK: - Unit Tests
 
-    func testAddThousandPlaceToFavoriteInPersistentContainer() {
-        for _ in 0 ..< 1000 {
-            addPlaceToFavorite(into: mockContainer.newBackgroundContext())
-        }
-        XCTAssertNoThrow(try mockContainer.newBackgroundContext().save())
-    }
-
     func testDeleteAllFavoritePlaceInPersistentContainer() {
         // Given
         addPlaceToFavorite(into: mockContainer.viewContext)
@@ -78,10 +71,10 @@ class CoredataWithMockContainerTests: XCTestCase {
         let title = "Altromercato"
         let coordinate = CLLocation(latitude: 40.851203, longitude: 14.231299)
         let address = "Via Giuseppe Orsi, 72, 80128 Napoli"
-        let website = "https://www.altromercato.it/it_it/"
-        let image = "https://firebasestorage.googleapis.com/v0/b/wheretogodatas.appspot.com/o/naples%2Fshop%2Faltromercato_1.jpg?alt=media&token=c9b8ceec-0444-4d90-97a8-d21e4127581e"
+        let website = "https:www.altromercato.it/it_it/"
+        let image = "https:firebasestorage.googleapis.com/v0/b/wheretogodatas.appspot.com/o/naples%2Fshop%2Faltromercato_1.jpg?alt=media&token=c9b8ceec-0444-4d90-97a8-d21e4127581e"
         let phoneNumber = "+39 081 5789053"
-        let interestCategory = InterestCategory.shop(city: "naples")
+        let interestCategory = POIType.shop
 
         let selectedPlaceInfo: [String: Any] = ["title": title, "latCoordinate": coordinate.coordinate.latitude, "longCoordinate": coordinate.coordinate.longitude, "address": address, "image": image, "phoneNumber": phoneNumber, "interestCategory": interestCategory, "website": website]
         // When

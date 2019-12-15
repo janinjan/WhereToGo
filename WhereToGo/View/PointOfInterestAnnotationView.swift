@@ -15,7 +15,7 @@ class PointOfInterestAnnotationView: MKMarkerAnnotationView {
     override var annotation: MKAnnotation? {
         willSet {
             if let place = newValue as? PointOfInterest {
-                switch place.interestCategory {
+                switch place.category {
                 case .all:
                     break
                 case .shop:
@@ -79,7 +79,7 @@ class PointOfInterestAnnotationView: MKMarkerAnnotationView {
         guard let website = annotation.website else { return }
         guard let image = annotation.image else { return }
         guard let phoneNumber = annotation.phoneNumber else { return }
-        let interestCategory = annotation.interestCategory
+        let interestCategory = annotation.category
 
         let selectedPlaceInfo: [String: Any] = ["title": title, "latCoordinate": coordinate.coordinate.latitude, "longCoordinate": coordinate.coordinate.longitude, "address": address, "image": image, "phoneNumber": phoneNumber, "interestCategory": interestCategory, "website": website]
 
