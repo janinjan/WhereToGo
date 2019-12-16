@@ -14,7 +14,7 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var placesImage: UIImageView!
     @IBOutlet weak var placesName: UILabel!
     @IBOutlet weak var placesAddress: UILabel!
-    @IBOutlet weak var placesPhone: UILabel!
+    @IBOutlet weak var placesPhone: UIButton!
     @IBOutlet weak var websiteButton: UIButton!
     @IBOutlet weak var favButton: FavoriteButton!
 
@@ -44,6 +44,14 @@ class DetailsViewController: UIViewController {
         }
     }
 
+    @IBAction func didTapPhoneNumber(_ sender: UIButton) {
+        guard let phone = curentPlace["phoneNumber"] as? String else { return }
+        print(phone)
+        guard let url = URL(string: phone) else { return }
+        print(phone)
+        UIApplication.shared.open(url)
+    }
+
     @IBAction func didTapWebsite(_ sender: UIButton) {
         guard let website = curentPlace["website"]  as? String else { return }
         guard let url = URL(string: website) else { return }
@@ -66,7 +74,7 @@ class DetailsViewController: UIViewController {
         // Display Informations
         placesName.text = title
         placesAddress.text = address
-        placesPhone.text = phoneNumber
+        placesPhone.setTitle(phoneNumber, for: .normal)
         if website.isEmpty {
             websiteButton.isHidden = true
         }

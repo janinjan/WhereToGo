@@ -21,10 +21,12 @@ class BaseScreenViewController: UIViewController, CityPickerDelegate {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var cityName: UIButton!
+    var allPlaces = [PointOfInterest]()
+    var currentCity = ""
 
     // MARK: - Properties
     let categories = [(#imageLiteral(resourceName: "AllButton"),"All"),(#imageLiteral(resourceName: "ShopButton"), "Shop"), (#imageLiteral(resourceName: "FoodButton"), "Food"), (#imageLiteral(resourceName: "HotelsButton"), "Hotel"), (#imageLiteral(resourceName: "BikesButton"),  "Bike"), (#imageLiteral(resourceName: "WaterButton"), "Water")]
-    private var selectedCity: City = .naples
+    var selectedCity: City = .naples
     let locationManager = CLLocationManager() // get a location manager reference
     let naplesCoordinates = CLLocationCoordinate2D(latitude: 40.8663100, longitude: 14.2864100)
     let parisCoordinates = CLLocationCoordinate2D(latitude: 48.864716, longitude: 2.349014)
@@ -46,11 +48,6 @@ class BaseScreenViewController: UIViewController, CityPickerDelegate {
     let segueIdentifier = "BaseToCities"
 
     let firestoreService = FirestoreService()
-
-    // MARK: - Actions
-    @IBAction func didTapChangeCity(_ sender: UIButton) {
-        performSegue(withIdentifier: segueIdentifier, sender: self)
-    }
 
     // MARK: - Properties (Slider)
     var sliderViewController: SliderViewController!
@@ -76,10 +73,31 @@ class BaseScreenViewController: UIViewController, CityPickerDelegate {
         checkLocationServices()
         mapView.register(PointOfInterestAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
         setupSlider()
-        getDatas(city: "paris")
-        getDatas(city: "naples")
-        addAllAnnotations()
         NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveData(_:)), name: Notification.Name("didReceiveData"), object: nil)
+    }
+
+    // MARK: - Actions
+    @IBAction func didTapChangeCity(_ sender: UIButton) {
+        performSegue(withIdentifier: segueIdentifier, sender: self)
+    }
+
+    @IBAction func unwindSegue(segue: UIStoryboardSegue) {
+        if segue.source is FavoritesViewController {
+            if let senderVC = segue.source as? FavoritesViewController {
+                let favoriteplace = senderVC.favoritePlace
+                var coordinate : CLLocation?
+                
+                for place in allPlaces {
+                    if place.title == favoriteplace?.titleAtb {
+                        coordinate = CLLocation(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
+                    }
+                    if coordinate != nil {
+                        let region = MKCoordinateRegion(center: coordinate!.coordinate, latitudinalMeters: 200 * 2.0, longitudinalMeters: 200 * 2.0)
+                        mapView.setRegion(region, animated: true)
+                    }
+                }
+            }
+        }
     }
 
     @objc func onDidReceiveData(_ notification: Notification) {
@@ -87,9 +105,9 @@ class BaseScreenViewController: UIViewController, CityPickerDelegate {
         self.currentPlace = selectedPlaceInfo
 
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let newsliderViewController = (storyboard.instantiateViewController(withIdentifier: "infoPlace") as? DetailsViewController) else { return }
-        newsliderViewController.curentPlace = currentPlace // pass data to detailVC
-        navigationController?.pushViewController(newsliderViewController, animated: true)
+        guard let newDetailViewController = (storyboard.instantiateViewController(withIdentifier: "infoPlace") as? DetailsViewController) else { return }
+        newDetailViewController.curentPlace = currentPlace // pass data to detailVC
+        navigationController?.pushViewController(newDetailViewController, animated: true)
     }
 
     // MARK: - Segue to Cities TableView
@@ -104,7 +122,7 @@ class BaseScreenViewController: UIViewController, CityPickerDelegate {
     func changeCity(name: City) {
         cityName.setTitle(name.name() + " ⌵", for: .normal)
         selectedCity = name
-        addAllAnnotations()
+        getDatas(city: name.name())
         setupMapCoordinate() // Update view to selected city's coordinates
     }
 
@@ -121,11 +139,16 @@ class BaseScreenViewController: UIViewController, CityPickerDelegate {
 
     // Get datas from Firebase
     private func getDatas(city: String) {
-        firestoreService.getCollection(url: .shop(city: city), cityName: city)
-        firestoreService.getCollection(url: .food(city: city), cityName: city)
-        firestoreService.getCollection(url: .hotel(city: city), cityName: city)
-        firestoreService.getCollection(url: .bike(city: city), cityName: city)
-        firestoreService.getCollection(url: .water(city: city), cityName: city)
+        self.currentCity = city
+        firestoreService.getCollection(cityName: city) { result in
+            switch result {
+            case .success(let pointOfInterests):
+                self.allPlaces = pointOfInterests
+                self.displayAnnotations(type: .all)
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 
     private func setupLocationManager() {
@@ -176,6 +199,8 @@ extension BaseScreenViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoryCell", for: indexPath) as? CategoryCollectionViewCell else { return UICollectionViewCell() }
 
         cell.category = categories[indexPath.row]
+        cell.chevronDownSymbol.tintColor = .clear
+        cell.categoryName.textColor = .darkGray
         return cell
     }
 }
@@ -185,27 +210,30 @@ extension BaseScreenViewController: UICollectionViewDataSource {
 // =========================================
 extension BaseScreenViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.isMultipleTouchEnabled = false
         guard let selectedCell = collectionView.cellForItem(at: indexPath) as? CategoryCollectionViewCell else { return }
         selectedCell.categoryName.textColor = .black
         selectedCell.chevronDownSymbol.tintColor = .black
-        removeAllAnnotations()
-        mapView.addAnnotations(pointsOfInterest(for: indexPath.item))
+
+        switch indexPath.item {
+        case 0:
+            displayAnnotations(type: .all)
+        case 1:
+            displayAnnotations(type: .shop)
+        case 2:
+            displayAnnotations(type: .food)
+        case 3:
+            displayAnnotations(type: .hotel)
+        case 4:
+            displayAnnotations(type: .bike)
+        case 5:
+            displayAnnotations(type: .water)
+        default: return
+        }
+
         if sliderVisible { // collapsed the cardView if a category is selected
             animateTransitionIfNeeded(state: .collapsed, duration: 1)
         }
-    }
-
-    private func pointsOfInterest(for index: Int) -> [PointOfInterest] {
-        let allPoints = Location.shopsArray + Location.foodArray + Location.hotelsArray + Location.bikesArray + Location.waterArray
-        let indexAndPoint: [Int: [PointOfInterest]] = [
-            0 : allPoints,
-            1 : Location.shopsArray,
-            2 : Location.foodArray,
-            3 : Location.hotelsArray,
-            4 : Location.bikesArray,
-            5 : Location.waterArray
-        ]
-        return indexAndPoint[index] ?? allPoints
     }
 
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -260,11 +288,13 @@ extension BaseScreenViewController: MKMapViewDelegate {
         mapView.delegate = self
     }
 
-    private func addAllAnnotations() { // Add all eco-friendly places in the map
-        mapView.addAnnotations(pointsOfInterest(for: 0))
-    }
-
-    private func removeAllAnnotations() {
-        mapView.removeAnnotations(pointsOfInterest(for: 0))
+    private func displayAnnotations(type: POIType) { // Add all eco-friendly places in the map
+        if type == .all {
+            mapView.showAnnotations(allPlaces, animated: true)
+        } else {
+            let annotations = allPlaces.filter { $0.category == type }
+            mapView.removeAnnotations(allPlaces.filter { $0.category != type })
+            mapView.showAnnotations(annotations, animated: true)
+        }
     }
 }

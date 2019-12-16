@@ -16,7 +16,7 @@ class FavoritesViewController: UIViewController {
     // MARK: - Properties
     private var favoritePlaces = EcoPlaceEntity.fetchAll()
     private var placesNames = [String]()
-    private var favoritePlace: EcoPlaceEntity?
+    var favoritePlace: EcoPlaceEntity?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -109,6 +109,7 @@ extension FavoritesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if !isEditing {
             favoritePlace = favoritePlaces[indexPath.row]
+            self.performSegue(withIdentifier: "unwindSegue", sender: self)
             navigationController?.setToolbarHidden(true, animated: true)
         } else {
             navigationController?.setToolbarHidden(false, animated: true)

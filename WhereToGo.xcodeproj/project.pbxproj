@@ -13,6 +13,8 @@
 		3D14DF77239C7F9E0004F0E0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D14DF76239C7F9E0004F0E0 /* GoogleService-Info.plist */; };
 		3D2BE471239051D800AF7E39 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D2BE470239051D700AF7E39 /* MapKit.framework */; };
 		3D55DF4A23A46747008A9DD2 /* CoredataWithMockContainerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D55DF4923A46747008A9DD2 /* CoredataWithMockContainerTests.swift */; };
+		3D5FCA8823A539EB00A9A392 /* FirestoreTestsCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5FCA8723A539EB00A9A392 /* FirestoreTestsCase.swift */; };
+		3D5FCA8A23A53CE800A9A392 /* FirestoreProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5FCA8923A53CE800A9A392 /* FirestoreProtocol.swift */; };
 		3D5FD6AF23A2F02600C88C73 /* WhereToGo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3D5FD6AD23A2F02600C88C73 /* WhereToGo.xcdatamodeld */; };
 		3D5FD6FB23A2F8BE00C88C73 /* EcoPlaceEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5FD6FA23A2F8BE00C88C73 /* EcoPlaceEntity.swift */; };
 		3D5FD6FD23A3038300C88C73 /* FavoritePlaceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5FD6FC23A3038300C88C73 /* FavoritePlaceCollectionViewCell.swift */; };
@@ -56,6 +58,8 @@
 		3D14DF76239C7F9E0004F0E0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3D2BE470239051D700AF7E39 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		3D55DF4923A46747008A9DD2 /* CoredataWithMockContainerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoredataWithMockContainerTests.swift; sourceTree = "<group>"; };
+		3D5FCA8723A539EB00A9A392 /* FirestoreTestsCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreTestsCase.swift; sourceTree = "<group>"; };
+		3D5FCA8923A53CE800A9A392 /* FirestoreProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreProtocol.swift; sourceTree = "<group>"; };
 		3D5FD6AE23A2F02600C88C73 /* WhereToGo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WhereToGo.xcdatamodel; sourceTree = "<group>"; };
 		3D5FD6FA23A2F8BE00C88C73 /* EcoPlaceEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoPlaceEntity.swift; sourceTree = "<group>"; };
 		3D5FD6FC23A3038300C88C73 /* FavoritePlaceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePlaceCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -140,6 +144,14 @@
 			path = CoreDataTests;
 			sourceTree = "<group>";
 		};
+		3D55DF4B23A513C2008A9DD2 /* FirestoreTests */ = {
+			isa = PBXGroup;
+			children = (
+				3D5FCA8723A539EB00A9A392 /* FirestoreTestsCase.swift */,
+			);
+			path = FirestoreTests;
+			sourceTree = "<group>";
+		};
 		3DB3249423A1AE8600A6DB26 /* SubClasses */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,6 +195,7 @@
 		3DE438C1238DDA3A005051C4 /* WhereToGoTests */ = {
 			isa = PBXGroup;
 			children = (
+				3D55DF4B23A513C2008A9DD2 /* FirestoreTests */,
 				3D55DF4823A466F6008A9DD2 /* CoreDataTests */,
 				3DE438C4238DDA3A005051C4 /* Info.plist */,
 			);
@@ -194,6 +207,7 @@
 			children = (
 				3DF1BCAA239322AA0084478C /* PointOfInterest.swift */,
 				3D005DC2239C854000D74180 /* FirestoreService.swift */,
+				3D5FCA8923A53CE800A9A392 /* FirestoreProtocol.swift */,
 				3D5FD6AD23A2F02600C88C73 /* WhereToGo.xcdatamodeld */,
 				3D5FD6FA23A2F8BE00C88C73 /* EcoPlaceEntity.swift */,
 			);
@@ -457,6 +471,7 @@
 				3D77AC3E23A13DFF00DBDACF /* DetailsViewController.swift in Sources */,
 				3DE438DE238F67A2005051C4 /* FavoritesViewController.swift in Sources */,
 				3DE438AE238DDA39005051C4 /* SceneDelegate.swift in Sources */,
+				3D5FCA8A23A53CE800A9A392 /* FirestoreProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -465,6 +480,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D55DF4A23A46747008A9DD2 /* CoredataWithMockContainerTests.swift in Sources */,
+				3D5FCA8823A539EB00A9A392 /* FirestoreTestsCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
