@@ -17,6 +17,7 @@ class FavoritesViewController: UIViewController {
     private var favoritePlaces = EcoPlaceEntity.fetchAll()
     private var placesNames = [String]()
     var favoritePlace: EcoPlaceEntity?
+    let segueToFavoriteDetailViewIdentifier = "segueFromFavToDetailVC"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +54,15 @@ class FavoritesViewController: UIViewController {
             cell!.isInEditingMode = editing
         }
     }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+           if segue.identifier == segueToFavoriteDetailViewIdentifier {
+               if let destination = segue.destination as? DetailsViewController {
+                   destination.placeDetailsIsAskedFromFavorite = true
+                   destination.favoritePlace = favoritePlace // Perfom is in FavoriteVCDelegate extension
+               }
+           }
+       }
 }
 
 // =========================================
@@ -109,7 +119,7 @@ extension FavoritesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if !isEditing {
             favoritePlace = favoritePlaces[indexPath.row]
-            self.performSegue(withIdentifier: "unwindSegue", sender: self)
+            self.performSegue(withIdentifier: segueToFavoriteDetailViewIdentifier, sender: self)
             navigationController?.setToolbarHidden(true, animated: true)
         } else {
             navigationController?.setToolbarHidden(false, animated: true)

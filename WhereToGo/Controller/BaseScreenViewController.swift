@@ -44,7 +44,6 @@ class BaseScreenViewController: UIViewController, CityPickerDelegate {
     var userLong: Double = 0.0
     var usersCity = ""
     var currentPlace: [String: Any] = [:]
-
     let segueIdentifier = "BaseToCities"
 
     let firestoreService = FirestoreService()
@@ -74,30 +73,12 @@ class BaseScreenViewController: UIViewController, CityPickerDelegate {
         mapView.register(PointOfInterestAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
         setupSlider()
         NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveData(_:)), name: Notification.Name("didReceiveData"), object: nil)
+        getDatas(city: City.naples.name())
     }
 
     // MARK: - Actions
     @IBAction func didTapChangeCity(_ sender: UIButton) {
         performSegue(withIdentifier: segueIdentifier, sender: self)
-    }
-
-    @IBAction func unwindSegue(segue: UIStoryboardSegue) {
-        if segue.source is FavoritesViewController {
-            if let senderVC = segue.source as? FavoritesViewController {
-                let favoriteplace = senderVC.favoritePlace
-                var coordinate : CLLocation?
-                
-                for place in allPlaces {
-                    if place.title == favoriteplace?.titleAtb {
-                        coordinate = CLLocation(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
-                    }
-                    if coordinate != nil {
-                        let region = MKCoordinateRegion(center: coordinate!.coordinate, latitudinalMeters: 200 * 2.0, longitudinalMeters: 200 * 2.0)
-                        mapView.setRegion(region, animated: true)
-                    }
-                }
-            }
-        }
     }
 
     @objc func onDidReceiveData(_ notification: Notification) {
