@@ -33,7 +33,8 @@ class DetailsViewController: UIViewController {
             directionButton.isHidden = false
             displayFavoritePlaceInformation()
         } else {
-            if EcoPlaceEntity.placeAlreadyInFavorite(name: (curentPlace["title"] as? String)!) {
+            guard let currentPlaceName = curentPlace["title"] as? String else { return }
+            if EcoPlaceEntity.placeAlreadyInFavorite(name: currentPlaceName) {
                 favButton.activateButton(bool: true)
             }
             favButton.isHidden = false
@@ -52,7 +53,8 @@ class DetailsViewController: UIViewController {
         if favButton.isOn {
             EcoPlaceEntity.addPlaceToFavorite(ecoPlace: curentPlace)
         } else {
-            EcoPlaceEntity.delete(names: [(curentPlace["title"] as? String)!])
+            guard let currentPlaceName = curentPlace["title"] as? String else { return }
+            EcoPlaceEntity.delete(names: [currentPlaceName])
         }
     }
 
@@ -82,7 +84,7 @@ class DetailsViewController: UIViewController {
         }
     }
 
-    private func setupUI() {
+    private func setupUI() { // Add shadows and corner radius to elements
         addShadows(to: contentViewOfImage)
         websiteButton.layer.cornerRadius = 5
         

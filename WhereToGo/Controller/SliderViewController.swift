@@ -22,7 +22,7 @@ class SliderViewController: UIViewController {
         super.viewDidLoad()
         myParent = self.parent as? BaseScreenViewController
     }
-
+    // Displays informations about eco-places criteria
     var categories: [Category] = [
         ("Restaurants",
          """

@@ -50,10 +50,11 @@ class FirestoreServiceStub: FirestoreProtocol {
     static var stub: [String: [PointOfInterest]] = [:]
 
     var cityName: String {
-        return FirestoreServiceStub.stub.first!.key
+        return FirestoreServiceStub.stub.first?.key ?? "Naples"
     }
 
     func getCollection(cityName: String, completion: @escaping (Result<[PointOfInterest], Error>) -> Void) {
-        completion(.success(FirestoreServiceStub.stub[cityName]!))
+        guard let pointOfInterrest = FirestoreServiceStub.stub[cityName] else { return }
+        completion(.success(pointOfInterrest))
     }
 }

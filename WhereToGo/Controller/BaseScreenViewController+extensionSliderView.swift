@@ -18,14 +18,13 @@ extension BaseScreenViewController {
         self.visualEffectView?.isHidden = true
         
         sliderHeight = screenSize.height * sliderRatio - 110
-//        var sliderHandleAreaHeight = 200
 
         visualEffectView = UIVisualEffectView()
         self.visualEffectView.frame = self.mapView.bounds
         self.view.addSubview(visualEffectView)
         visualEffectView.isHidden = true
 
-        sliderViewController = (self.storyboard?.instantiateViewController(withIdentifier: "slider") as! SliderViewController)
+        sliderViewController = (self.storyboard?.instantiateViewController(withIdentifier: "slider") as? SliderViewController)
         self.addChild(sliderViewController)
         self.view.addSubview(sliderViewController.view)
 

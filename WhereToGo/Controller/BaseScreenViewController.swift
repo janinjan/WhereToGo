@@ -97,12 +97,13 @@ class BaseScreenViewController: UIViewController, CityPickerDelegate {
         navigationController?.pushViewController(newDetailViewController, animated: true)
     }
 
+    // Unwind segue from favorite in detailsVC to set the place location in the map
     @IBAction func unwindSegue(segue: UIStoryboardSegue) {
         if segue.source is DetailsViewController {
             if let senderVC = segue.source as? DetailsViewController {
-                let favoritePlace = senderVC.favoritePlace
+                guard let favoritePlace = senderVC.favoritePlace else { return }
                 var coordinate : CLLocation?
-                coordinate = CLLocation(latitude: favoritePlace!.coordinateLatAtb, longitude: favoritePlace!.coordinateLongAtb)
+                coordinate = CLLocation(latitude: favoritePlace.coordinateLatAtb, longitude: favoritePlace.coordinateLongAtb)
                 displayAnnotations(type: .all)
                 if coordinate != nil {
                     guard let center = coordinate?.coordinate else { return }
@@ -128,17 +129,6 @@ class BaseScreenViewController: UIViewController, CityPickerDelegate {
         getDatas(city: name.name())
         setupMapCoordinate() // Update view to selected city's coordinates
         collectionView.reloadData()
-    }
-
-    // Retreive user's city name with geocoder
-    private func retreiveCityName(latitude: Double, longitude: Double) {
-        let geocoder = CLGeocoder()
-        geocoder.reverseGeocodeLocation(CLLocation(latitude: latitude, longitude: longitude)) { (placemark, error) in
-            if let placemark = placemark?.first {
-                guard let cityName = placemark.locality else { return }
-                self.usersCity = cityName
-            }
-        }
     }
 
     // Get datas from Firebase
@@ -257,7 +247,7 @@ extension BaseScreenViewController: UICollectionViewDelegateFlowLayout {
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 5
     }
-
+    // Defines the Cell Size
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 86, height: 107)
     }
@@ -270,14 +260,6 @@ extension BaseScreenViewController: CLLocationManagerDelegate {
     // Everytime the user change location
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         checkLocationAuthorization()
-    }
-
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.first {
-            self.userLat = location.coordinate.latitude
-            self.userLong = location.coordinate.longitude
-            retreiveCityName(latitude: userLat, longitude: userLong)
-        }
     }
 }
 

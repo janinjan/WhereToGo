@@ -50,10 +50,15 @@ class FirestoreService: FirestoreProtocol {
                         guard let website = document.get("website") as? String else { return }
                         guard let phoneNumber = document.get("phoneNumber") as? String else { return }
                         guard let category = document.get("category") as? String else { return }
+                        guard let convertedCategory = POIType(rawValue: category) else { return }
                         guard let image = document.get("image") as? String else { return }
-                        
-                        let object = PointOfInterest(coordinate: self.coordinate, category: POIType(rawValue: category)!,
-                                                     title: title, address: address, image: image, phoneNumber: phoneNumber, website: website)
+                        let object = PointOfInterest(coordinate: self.coordinate,
+                                                     category: convertedCategory,
+                                                     title: title,
+                                                     address: address,
+                                                     image: image,
+                                                     phoneNumber: phoneNumber,
+                                                     website: website)
                         objects.append(object)
                         self.poiDictionnary[cityName] = objects
                     }
@@ -64,7 +69,7 @@ class FirestoreService: FirestoreProtocol {
     }
 
     private func convertGepointInCoordinate(geopoint: Any) {
-        let point = geopoint as! GeoPoint
+        guard let point = geopoint as? GeoPoint else { return }
         let lat = point.latitude
         let long = point.longitude
         self.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)

@@ -28,14 +28,16 @@ class EcoPlaceEntity: NSManagedObject {
         favPlace.addressAtb = ecoPlace["address"] as? String
         favPlace.websiteAtb = ecoPlace["website"] as? String
         favPlace.phoneAtb = ecoPlace["phoneNumber"] as? String
-        favPlace.coordinateLatAtb = ecoPlace["latCoordinate"] as! Double
-        favPlace.coordinateLongAtb = ecoPlace["longCoordinate"] as! Double
+        guard let latCoordinate = ecoPlace["latCoordinate"] as? Double else { return }
+        favPlace.coordinateLatAtb = latCoordinate
+        guard let longtCoordinate = ecoPlace["longCoordinate"] as? Double else { return }
+        favPlace.coordinateLongAtb = longtCoordinate
 
         guard let image = ecoPlace["image"] as? String else { return }
         guard let imageUrl = URL(string: image) else { return }
         favPlace.imageAtb = try? Data(contentsOf: imageUrl)
 
-        try? viewContext.save()
+        try? viewContext.save() // save in viewContext
     }
 
     static func delete(names: [String], viewContext: NSManagedObjectContext = AppDelegate.viewContext) {

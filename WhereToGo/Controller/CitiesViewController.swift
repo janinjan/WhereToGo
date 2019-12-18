@@ -51,9 +51,9 @@ extension CitiesViewController: UITableViewDataSource {
         cell.textLabel?.font = UIFont.systemFont(ofSize: 25.0)
         switch cityName {
         case City.paris.name():
-            cell.imageView?.image = citySymbolsImage.0
+            cell.imageView?.image = citySymbolsImage.0 //Show an imageView of the symbol of Paris
         case City.naples.name():
-            cell.imageView?.image = citySymbolsImage.1
+            cell.imageView?.image = citySymbolsImage.1 //Show an imageView of the symbol of Naples
         default:
             break
         }

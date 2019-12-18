@@ -28,7 +28,7 @@ class FavoritesViewController: UIViewController {
             editButtonItem.isEnabled = true
         }
         navigationItem.rightBarButtonItem = editButtonItem // Add Edit Button item in navigation bar
-        favoritePlaces = EcoPlaceEntity.fetchAll()
+        favoritePlaces = EcoPlaceEntity.fetchAll() // fetch all favorite places stored in CoreData
         collectionView.reloadData()
     }
 
@@ -55,8 +55,8 @@ class FavoritesViewController: UIViewController {
         let indexPaths = collectionView.indexPathsForVisibleItems
         for indexPath in indexPaths {
             collectionView.deselectItem(at: indexPath as IndexPath, animated: false)
-            let cell = collectionView!.cellForItem(at: indexPath) as? FavoritePlaceCollectionViewCell
-            cell!.isInEditingMode = editing
+            guard let cell = collectionView.cellForItem(at: indexPath) as? FavoritePlaceCollectionViewCell else { return }
+            cell.isInEditingMode = editing
         }
     }
 
@@ -134,7 +134,8 @@ extension FavoritesViewController: UICollectionViewDelegate {
     // If a cell is deselected and there are no other cells selected, the trash icon is hidden.
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if isEditing {
-            if collectionView.indexPathsForSelectedItems!.count == 0 {
+            guard let indexForSelectedItems = collectionView.indexPathsForSelectedItems else { return }
+            if indexForSelectedItems.count == 0 {
                 navigationController?.setToolbarHidden(true, animated: true)
             }
         }
