@@ -21,6 +21,8 @@ class BaseScreenViewController: UIViewController, CityPickerDelegate {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var cityName: UIButton!
+    var allPlaces = [PointOfInterest]()
+    var currentCity = ""
 
     // MARK: - Properties
     let categories = [(#imageLiteral(resourceName: "AllButton"),"All"),(#imageLiteral(resourceName: "ShopButton"), "Shop"), (#imageLiteral(resourceName: "FoodButton"), "Food"), (#imageLiteral(resourceName: "HotelsButton"), "Hotel"), (#imageLiteral(resourceName: "BikesButton"),  "Bike"), (#imageLiteral(resourceName: "WaterButton"), "Water")]
@@ -41,15 +43,10 @@ class BaseScreenViewController: UIViewController, CityPickerDelegate {
     var userLat: Double = 0.0
     var userLong: Double = 0.0
     var usersCity = ""
-
+    var currentPlace: [String: Any] = [:]
     let segueIdentifier = "BaseToCities"
 
     let firestoreService = FirestoreService()
-
-    // MARK: - Actions
-    @IBAction func didTapChangeCity(_ sender: UIButton) {
-        performSegue(withIdentifier: segueIdentifier, sender: self)
-    }
 
     // MARK: - Properties (Slider)
     var sliderViewController: SliderViewController!
@@ -75,9 +72,46 @@ class BaseScreenViewController: UIViewController, CityPickerDelegate {
         checkLocationServices()
         mapView.register(PointOfInterestAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
         setupSlider()
-        getDatas(city: "paris")
-        getDatas(city: "naples")
-        addAllAnnotations()
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveData(_:)), name: Notification.Name("didReceiveData"), object: nil)
+        getDatas(city: City.naples.name())
+        getDatas(city: City.paris.name())
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        collectionView.reloadData()
+    }
+
+    // MARK: - Actions
+    @IBAction func didTapChangeCity(_ sender: UIButton) {
+        performSegue(withIdentifier: segueIdentifier, sender: self)
+    }
+
+    @objc func onDidReceiveData(_ notification: Notification) {
+        guard let selectedPlaceInfo = notification.object as? [String: Any] else { return }
+        self.currentPlace = selectedPlaceInfo
+
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let newDetailViewController = (storyboard.instantiateViewController(withIdentifier: "infoPlace") as? DetailsViewController) else { return }
+        newDetailViewController.curentPlace = currentPlace // pass data to detailVC
+        navigationController?.pushViewController(newDetailViewController, animated: true)
+    }
+
+    // Unwind segue from favorite in detailsVC to set the place location in the map
+    @IBAction func unwindSegue(segue: UIStoryboardSegue) {
+        if segue.source is DetailsViewController {
+            if let senderVC = segue.source as? DetailsViewController {
+                guard let favoritePlace = senderVC.favoritePlace else { return }
+                var coordinate : CLLocation?
+                coordinate = CLLocation(latitude: favoritePlace.coordinateLatAtb, longitude: favoritePlace.coordinateLongAtb)
+                displayAnnotations(type: .all)
+                if coordinate != nil {
+                    guard let center = coordinate?.coordinate else { return }
+                    let region = MKCoordinateRegion(center: center, latitudinalMeters: 200 * 2.0, longitudinalMeters: 200 * 2.0)
+                    mapView.setRegion(region, animated: true)
+                }
+            }
+        }
     }
 
     // MARK: - Segue to Cities TableView
@@ -92,28 +126,23 @@ class BaseScreenViewController: UIViewController, CityPickerDelegate {
     func changeCity(name: City) {
         cityName.setTitle(name.name() + " ⌵", for: .normal)
         selectedCity = name
-        addAllAnnotations()
+        getDatas(city: name.name())
         setupMapCoordinate() // Update view to selected city's coordinates
-    }
-
-    // Retreive user's city name with geocoder
-    private func retreiveCityName(latitude: Double, longitude: Double) {
-        let geocoder = CLGeocoder()
-        geocoder.reverseGeocodeLocation(CLLocation(latitude: latitude, longitude: longitude)) { (placemark, error) in
-            if let placemark = placemark?.first {
-                guard let cityName = placemark.locality else { return }
-                self.usersCity = cityName
-            }
-        }
+        collectionView.reloadData()
     }
 
     // Get datas from Firebase
-    func getDatas(city: String) {
-        firestoreService.getCollection(url: .shop(city: city), cityName: city)
-        firestoreService.getCollection(url: .food(city: city), cityName: city)
-        firestoreService.getCollection(url: .hotel(city: city), cityName: city)
-        firestoreService.getCollection(url: .bike(city: city), cityName: city)
-        firestoreService.getCollection(url: .water(city: city), cityName: city)
+    private func getDatas(city: String) {
+        self.currentCity = city
+        firestoreService.getCollection(cityName: city) { result in
+            switch result {
+            case .success(let pointOfInterests):
+                self.allPlaces = pointOfInterests
+                self.displayAnnotations(type: .all)
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 
     private func setupLocationManager() {
@@ -164,6 +193,8 @@ extension BaseScreenViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoryCell", for: indexPath) as? CategoryCollectionViewCell else { return UICollectionViewCell() }
 
         cell.category = categories[indexPath.row]
+        cell.chevronDownSymbol.isHidden = true
+        cell.categoryName.textColor = .darkGray
         return cell
     }
 }
@@ -173,30 +204,36 @@ extension BaseScreenViewController: UICollectionViewDataSource {
 // =========================================
 extension BaseScreenViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.isMultipleTouchEnabled = false
         guard let selectedCell = collectionView.cellForItem(at: indexPath) as? CategoryCollectionViewCell else { return }
         selectedCell.categoryName.textColor = .black
-        selectedCell.chevronDownSymbol.tintColor = .black
-        removeAllAnnotations()
-        mapView.addAnnotations(pointsOfInterest(for: indexPath.item))
-    }
+        selectedCell.chevronDownSymbol.isHidden = false
 
-    private func pointsOfInterest(for index: Int) -> [PointOfInterest] {
-        let allPoints = Location.shopsArray + Location.foodArray + Location.hotelsArray + Location.bikesArray + Location.waterArray
-        let indexAndPoint: [Int: [PointOfInterest]] = [
-            0 : allPoints,
-            1 : Location.shopsArray,
-            2 : Location.foodArray,
-            3 : Location.hotelsArray,
-            4 : Location.bikesArray,
-            5 : Location.waterArray
-        ]
-        return indexAndPoint[index] ?? allPoints
+        switch indexPath.item {
+        case 0:
+            displayAnnotations(type: .all)
+        case 1:
+            displayAnnotations(type: .shop)
+        case 2:
+            displayAnnotations(type: .food)
+        case 3:
+            displayAnnotations(type: .hotel)
+        case 4:
+            displayAnnotations(type: .bike)
+        case 5:
+            displayAnnotations(type: .water)
+        default: return
+        }
+
+        if sliderVisible { // collapsed the cardView if a category is selected
+            animateTransitionIfNeeded(state: .collapsed, duration: 1)
+        }
     }
 
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         guard let selectedCell = collectionView.cellForItem(at: indexPath) as? CategoryCollectionViewCell else { return }
         selectedCell.categoryName.textColor = .greyLabel
-        selectedCell.chevronDownSymbol.tintColor = .clear
+        selectedCell.chevronDownSymbol.isHidden = true
     }
 }
 
@@ -210,6 +247,10 @@ extension BaseScreenViewController: UICollectionViewDelegateFlowLayout {
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 5
     }
+    // Defines the Cell Size
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 86, height: 107)
+    }
 }
 
 // =========================================
@@ -219,14 +260,6 @@ extension BaseScreenViewController: CLLocationManagerDelegate {
     // Everytime the user change location
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         checkLocationAuthorization()
-    }
-
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.first {
-            self.userLat = location.coordinate.latitude
-            self.userLong = location.coordinate.longitude
-            retreiveCityName(latitude: userLat, longitude: userLong)
-        }
     }
 }
 
@@ -245,11 +278,13 @@ extension BaseScreenViewController: MKMapViewDelegate {
         mapView.delegate = self
     }
 
-    private func addAllAnnotations() { // Add all eco-friendly places in the map
-        mapView.addAnnotations(pointsOfInterest(for: 0))
-    }
-
-    private func removeAllAnnotations() {
-        mapView.removeAnnotations(pointsOfInterest(for: 0))
+    private func displayAnnotations(type: POIType) { // Add all eco-friendly places in the map
+        if type == .all {
+            mapView.showAnnotations(allPlaces, animated: true)
+        } else {
+            let annotations = allPlaces.filter { $0.category == type }
+            mapView.removeAnnotations(allPlaces.filter { $0.category != type })
+            mapView.showAnnotations(annotations, animated: true)
+        }
     }
 }

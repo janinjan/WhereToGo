@@ -12,7 +12,16 @@
 		3D14DF75239C7F600004F0E0 /* FirebaseFirestore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D14DF74239C7F600004F0E0 /* FirebaseFirestore.framework */; };
 		3D14DF77239C7F9E0004F0E0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D14DF76239C7F9E0004F0E0 /* GoogleService-Info.plist */; };
 		3D2BE471239051D800AF7E39 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D2BE470239051D700AF7E39 /* MapKit.framework */; };
-		3D83C783239EEDCE00892B00 /* DiscoverCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D83C782239EEDCE00892B00 /* DiscoverCollectionViewCell.swift */; };
+		3D55DF4A23A46747008A9DD2 /* CoredataWithMockContainerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D55DF4923A46747008A9DD2 /* CoredataWithMockContainerTests.swift */; };
+		3D5FCA8823A539EB00A9A392 /* FirestoreTestsCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5FCA8723A539EB00A9A392 /* FirestoreTestsCase.swift */; };
+		3D5FCA8A23A53CE800A9A392 /* FirestoreProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5FCA8923A53CE800A9A392 /* FirestoreProtocol.swift */; };
+		3D5FD6AF23A2F02600C88C73 /* WhereToGo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3D5FD6AD23A2F02600C88C73 /* WhereToGo.xcdatamodeld */; };
+		3D5FD6FB23A2F8BE00C88C73 /* EcoPlaceEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5FD6FA23A2F8BE00C88C73 /* EcoPlaceEntity.swift */; };
+		3D5FD6FD23A3038300C88C73 /* FavoritePlaceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5FD6FC23A3038300C88C73 /* FavoritePlaceCollectionViewCell.swift */; };
+		3D5FD6FF23A3FF5F00C88C73 /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5FD6FE23A3FF5F00C88C73 /* UICollectionView.swift */; };
+		3D77AC3E23A13DFF00DBDACF /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D77AC3D23A13DFF00DBDACF /* DetailsViewController.swift */; };
+		3D77AC4823A18F4A00DBDACF /* InfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D77AC4723A18F4A00DBDACF /* InfoTableViewCell.swift */; };
+		3D77AC4A23A1AC4300DBDACF /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D77AC4923A1AC4300DBDACF /* FavoriteButton.swift */; };
 		3D83C789239F280600892B00 /* BaseScreenViewController+extensionSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D83C788239F280600892B00 /* BaseScreenViewController+extensionSliderView.swift */; };
 		3DCA743623933A4F009A2CE3 /* SliderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCA743523933A4F009A2CE3 /* SliderViewController.swift */; };
 		3DE438AC238DDA39005051C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE438AB238DDA39005051C4 /* AppDelegate.swift */; };
@@ -20,7 +29,6 @@
 		3DE438B3238DDA39005051C4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DE438B1238DDA39005051C4 /* Main.storyboard */; };
 		3DE438B5238DDA3A005051C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DE438B4238DDA3A005051C4 /* Assets.xcassets */; };
 		3DE438B8238DDA3A005051C4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DE438B6238DDA3A005051C4 /* LaunchScreen.storyboard */; };
-		3DE438C3238DDA3A005051C4 /* WhereToGoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE438C2238DDA3A005051C4 /* WhereToGoTests.swift */; };
 		3DE438D8238DEA8D005051C4 /* BaseScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE438D7238DEA8D005051C4 /* BaseScreenViewController.swift */; };
 		3DE438DA238F48F2005051C4 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE438D9238F48F2005051C4 /* CategoryCollectionViewCell.swift */; };
 		3DE438DC238F5CF0005051C4 /* CitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE438DB238F5CF0005051C4 /* CitiesViewController.swift */; };
@@ -49,7 +57,16 @@
 		3D14DF74239C7F600004F0E0 /* FirebaseFirestore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseFirestore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D14DF76239C7F9E0004F0E0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3D2BE470239051D700AF7E39 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		3D83C782239EEDCE00892B00 /* DiscoverCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionViewCell.swift; sourceTree = "<group>"; };
+		3D55DF4923A46747008A9DD2 /* CoredataWithMockContainerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoredataWithMockContainerTests.swift; sourceTree = "<group>"; };
+		3D5FCA8723A539EB00A9A392 /* FirestoreTestsCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreTestsCase.swift; sourceTree = "<group>"; };
+		3D5FCA8923A53CE800A9A392 /* FirestoreProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreProtocol.swift; sourceTree = "<group>"; };
+		3D5FD6AE23A2F02600C88C73 /* WhereToGo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WhereToGo.xcdatamodel; sourceTree = "<group>"; };
+		3D5FD6FA23A2F8BE00C88C73 /* EcoPlaceEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoPlaceEntity.swift; sourceTree = "<group>"; };
+		3D5FD6FC23A3038300C88C73 /* FavoritePlaceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePlaceCollectionViewCell.swift; sourceTree = "<group>"; };
+		3D5FD6FE23A3FF5F00C88C73 /* UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
+		3D77AC3D23A13DFF00DBDACF /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		3D77AC4723A18F4A00DBDACF /* InfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTableViewCell.swift; sourceTree = "<group>"; };
+		3D77AC4923A1AC4300DBDACF /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
 		3D83C788239F280600892B00 /* BaseScreenViewController+extensionSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseScreenViewController+extensionSliderView.swift"; sourceTree = "<group>"; };
 		3DCA743523933A4F009A2CE3 /* SliderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderViewController.swift; sourceTree = "<group>"; };
 		3DE438A8238DDA39005051C4 /* WhereToGo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhereToGo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,7 +77,6 @@
 		3DE438B7238DDA3A005051C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3DE438B9238DDA3A005051C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3DE438BE238DDA3A005051C4 /* WhereToGoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WhereToGoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3DE438C2238DDA3A005051C4 /* WhereToGoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhereToGoTests.swift; sourceTree = "<group>"; };
 		3DE438C4238DDA3A005051C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3DE438D7238DEA8D005051C4 /* BaseScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseScreenViewController.swift; sourceTree = "<group>"; };
 		3DE438D9238F48F2005051C4 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -120,6 +136,30 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		3D55DF4823A466F6008A9DD2 /* CoreDataTests */ = {
+			isa = PBXGroup;
+			children = (
+				3D55DF4923A46747008A9DD2 /* CoredataWithMockContainerTests.swift */,
+			);
+			path = CoreDataTests;
+			sourceTree = "<group>";
+		};
+		3D55DF4B23A513C2008A9DD2 /* FirestoreTests */ = {
+			isa = PBXGroup;
+			children = (
+				3D5FCA8723A539EB00A9A392 /* FirestoreTestsCase.swift */,
+			);
+			path = FirestoreTests;
+			sourceTree = "<group>";
+		};
+		3DB3249423A1AE8600A6DB26 /* SubClasses */ = {
+			isa = PBXGroup;
+			children = (
+				3D77AC4923A1AC4300DBDACF /* FavoriteButton.swift */,
+			);
+			path = SubClasses;
+			sourceTree = "<group>";
+		};
 		3DE4389F238DDA39005051C4 = {
 			isa = PBXGroup;
 			children = (
@@ -155,7 +195,8 @@
 		3DE438C1238DDA3A005051C4 /* WhereToGoTests */ = {
 			isa = PBXGroup;
 			children = (
-				3DE438C2238DDA3A005051C4 /* WhereToGoTests.swift */,
+				3D55DF4B23A513C2008A9DD2 /* FirestoreTests */,
+				3D55DF4823A466F6008A9DD2 /* CoreDataTests */,
 				3DE438C4238DDA3A005051C4 /* Info.plist */,
 			);
 			path = WhereToGoTests;
@@ -166,6 +207,9 @@
 			children = (
 				3DF1BCAA239322AA0084478C /* PointOfInterest.swift */,
 				3D005DC2239C854000D74180 /* FirestoreService.swift */,
+				3D5FCA8923A53CE800A9A392 /* FirestoreProtocol.swift */,
+				3D5FD6AD23A2F02600C88C73 /* WhereToGo.xcdatamodeld */,
+				3D5FD6FA23A2F8BE00C88C73 /* EcoPlaceEntity.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -173,11 +217,13 @@
 		3DE438D4238DE8C8005051C4 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3DB3249423A1AE8600A6DB26 /* SubClasses */,
 				3DE438B1238DDA39005051C4 /* Main.storyboard */,
 				3DE438B6238DDA3A005051C4 /* LaunchScreen.storyboard */,
 				3DE438D9238F48F2005051C4 /* CategoryCollectionViewCell.swift */,
 				3DF1BCAC239323810084478C /* PointOfInterestAnnotationView.swift */,
-				3D83C782239EEDCE00892B00 /* DiscoverCollectionViewCell.swift */,
+				3D77AC4723A18F4A00DBDACF /* InfoTableViewCell.swift */,
+				3D5FD6FC23A3038300C88C73 /* FavoritePlaceCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -190,6 +236,7 @@
 				3DE438DD238F67A2005051C4 /* FavoritesViewController.swift */,
 				3DCA743523933A4F009A2CE3 /* SliderViewController.swift */,
 				3D83C788239F280600892B00 /* BaseScreenViewController+extensionSliderView.swift */,
+				3D77AC3D23A13DFF00DBDACF /* DetailsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -211,6 +258,7 @@
 			children = (
 				3DF1BCA82393166E0084478C /* UIColor.swift */,
 				3DF1BCAE239330B40084478C /* UIViewController.swift */,
+				3D5FD6FE23A3FF5F00C88C73 /* UICollectionView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -272,6 +320,7 @@
 					};
 					3DE438BD238DDA3A005051C4 = {
 						CreatedOnToolsVersion = 11.2.1;
+						LastSwiftMigration = 1120;
 						TestTargetID = 3DE438A7238DDA39005051C4;
 					};
 				};
@@ -408,14 +457,21 @@
 				3DF1BCA92393166E0084478C /* UIColor.swift in Sources */,
 				3DF1BCAD239323810084478C /* PointOfInterestAnnotationView.swift in Sources */,
 				3D83C789239F280600892B00 /* BaseScreenViewController+extensionSliderView.swift in Sources */,
+				3D5FD6AF23A2F02600C88C73 /* WhereToGo.xcdatamodeld in Sources */,
+				3D77AC4823A18F4A00DBDACF /* InfoTableViewCell.swift in Sources */,
 				3DF1BCAF239330B40084478C /* UIViewController.swift in Sources */,
 				3DE438DC238F5CF0005051C4 /* CitiesViewController.swift in Sources */,
+				3D5FD6FF23A3FF5F00C88C73 /* UICollectionView.swift in Sources */,
 				3DE438AC238DDA39005051C4 /* AppDelegate.swift in Sources */,
-				3D83C783239EEDCE00892B00 /* DiscoverCollectionViewCell.swift in Sources */,
 				3DCA743623933A4F009A2CE3 /* SliderViewController.swift in Sources */,
+				3D77AC4A23A1AC4300DBDACF /* FavoriteButton.swift in Sources */,
+				3D5FD6FD23A3038300C88C73 /* FavoritePlaceCollectionViewCell.swift in Sources */,
 				3DE438D8238DEA8D005051C4 /* BaseScreenViewController.swift in Sources */,
+				3D5FD6FB23A2F8BE00C88C73 /* EcoPlaceEntity.swift in Sources */,
+				3D77AC3E23A13DFF00DBDACF /* DetailsViewController.swift in Sources */,
 				3DE438DE238F67A2005051C4 /* FavoritesViewController.swift in Sources */,
 				3DE438AE238DDA39005051C4 /* SceneDelegate.swift in Sources */,
+				3D5FCA8A23A53CE800A9A392 /* FirestoreProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,7 +479,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3DE438C3238DDA3A005051C4 /* WhereToGoTests.swift in Sources */,
+				3D55DF4A23A46747008A9DD2 /* CoredataWithMockContainerTests.swift in Sources */,
+				3D5FCA8823A539EB00A9A392 /* FirestoreTestsCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,7 +564,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -561,7 +618,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -580,7 +637,7 @@
 				DEVELOPMENT_TEAM = P6FCPFN549;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/WhereToGo/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -602,7 +659,7 @@
 				DEVELOPMENT_TEAM = P6FCPFN549;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/WhereToGo/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -621,10 +678,13 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P6FCPFN549;
 				INFOPLIST_FILE = WhereToGoTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -632,6 +692,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = fr.culhaoglujanin.WhereToGoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WhereToGo.app/WhereToGo";
@@ -644,10 +707,13 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P6FCPFN549;
 				INFOPLIST_FILE = WhereToGoTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -655,6 +721,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = fr.culhaoglujanin.WhereToGoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WhereToGo.app/WhereToGo";
@@ -692,6 +760,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		3D5FD6AD23A2F02600C88C73 /* WhereToGo.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3D5FD6AE23A2F02600C88C73 /* WhereToGo.xcdatamodel */,
+			);
+			currentVersion = 3D5FD6AE23A2F02600C88C73 /* WhereToGo.xcdatamodel */;
+			path = WhereToGo.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 3DE438A0238DDA39005051C4 /* Project object */;
 }

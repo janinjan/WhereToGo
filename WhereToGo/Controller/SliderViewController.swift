@@ -8,44 +8,72 @@
 
 import UIKit
 
+typealias Category = (title: String, description: String, icon: UIImage?)
+
 class SliderViewController: UIViewController {
 
     // MARK: - Outlets
-    @IBOutlet weak var categoryName: UILabel!
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var handleArea: UIView!
+
     var myParent: BaseScreenViewController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         myParent = self.parent as? BaseScreenViewController
     }
+    // Displays informations about eco-places criteria
+    var categories: [Category] = [
+        ("Restaurants",
+         """
+        - Local food
+        - Organic and/or seasonal products
+        - Resort to short food circuits
+        - Stock and expiration dates management
+        - Energy efficient equipment
+        - Efficient water management
+        - Use sustainable furniture and utensils
+        - Recovering of biowaste
+        - Ecological cleaning products
+        - No plastic use
+        - Waste separation and management
+        - Staff training and active information to guests
+        - Sustainable delivery service
+        """
+            , UIImage(named: "FoodGlyphGray")),
+        ("Hotels",
+         """
+        - Renewable energy sources
+        - Optimized building energy performance
+        - Energy saving lamps
+        - Energy efficient air conditioning
+        - Efficient water management
+        - Staff training and active information to guests
+        - Ecological cleaning products
+        - Waste separation
+        - Furnishings made out of natural and/or recycled materials
+        - No plastic use
+        - Organic and/or local food
+        - Car-free accessibility
+        - Bike rental
+        """
+            , UIImage(named: "HotelGlyphGray"))]
 }
 
 // =========================================
-// MARK: - CollectionView Datasource
+// MARK: - TableView datasource
 // =========================================
-extension SliderViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+extension SliderViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        categories.count
     }
 
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoryCell", for: indexPath) as? DiscoverCollectionViewCell else { return UICollectionViewCell() }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "infoCell") as? InfoTableViewCell else { return UITableViewCell() }
+
+        cell.titleLabel.text = categories[indexPath.row].title
+        cell.descriptionLabel.text = categories[indexPath.row].description
+        cell.iconImageView.image = categories[indexPath.row].icon
         return cell
-    }
-}
-
-// =========================================
-// MARK: - CollectionView Delegate FlowLayout
-// =========================================
-
-extension SliderViewController: UICollectionViewDelegateFlowLayout {
-    // Cell Size
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let side = (view.frame.width - 30)
-        return CGSize(width: side, height: 258)
     }
 }

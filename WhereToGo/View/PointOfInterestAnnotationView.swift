@@ -15,24 +15,24 @@ class PointOfInterestAnnotationView: MKMarkerAnnotationView {
     override var annotation: MKAnnotation? {
         willSet {
             if let place = newValue as? PointOfInterest {
-                switch place.interestCategory {
+                switch place.category {
                 case .all:
                     break
                 case .shop:
                     markerTintColor = UIColor.shopColor
-                    glyphImage = UIImage(named: "ShopGlyph")
+                    glyphImage = UIImage(named: "ShopGlyphSmall")
                 case .food:
                     markerTintColor = UIColor.foodColor
-                     glyphImage = UIImage(named: "FoodGlyph")
+                    glyphImage = UIImage(named: "FoodGlyph")
                 case .hotel:
                     markerTintColor = UIColor.hotelsColor
-                     glyphImage = UIImage(named: "HotelGlyph")
+                    glyphImage = UIImage(named: "HotelGlyph")
                 case .bike:
                     markerTintColor = UIColor.bikesColor
-                     glyphImage = UIImage(named: "BikeGlyph")
+                    glyphImage = UIImage(named: "BikeGlyph")
                 case .water:
                     markerTintColor = UIColor.waterColor
-                     glyphImage = UIImage(named: "WaterGlyph")
+                    glyphImage = UIImage(named: "WaterGlyph")
                 }
             }
             canShowCallout = true
@@ -63,11 +63,26 @@ class PointOfInterestAnnotationView: MKMarkerAnnotationView {
     // Create right button for information
     private func setupRightButton() -> UIButton {
         let rightButton = UIButton(type: .detailDisclosure)
-        rightButton.addTarget(self, action: #selector(displayInfo), for: .touchUpInside)
+        rightButton.addTarget(self, action: #selector(displayInfoTapped), for: .touchUpInside)
         return rightButton
     }
 
-    @objc func displayInfo() {
-        // To do
+    @objc func displayInfoTapped() {
+        retrieveSelectedPlaceInfos()
+    }
+
+    func retrieveSelectedPlaceInfos() {
+        guard let annotation = annotation as? PointOfInterest else { return }
+        guard let title = annotation.title else { return }
+        let coordinate = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
+        guard let address = annotation.address else { return }
+        guard let website = annotation.website else { return }
+        guard let image = annotation.image else { return }
+        guard let phoneNumber = annotation.phoneNumber else { return }
+        let interestCategory = annotation.category
+
+        let selectedPlaceInfo: [String: Any] = ["title": title, "latCoordinate": coordinate.coordinate.latitude, "longCoordinate": coordinate.coordinate.longitude, "address": address, "image": image, "phoneNumber": phoneNumber, "interestCategory": interestCategory, "website": website]
+
+        NotificationCenter.default.post(name: Notification.Name("didReceiveData"), object: selectedPlaceInfo)
     }
 }
