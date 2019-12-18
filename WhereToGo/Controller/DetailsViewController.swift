@@ -18,6 +18,7 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var websiteButton: UIButton!
     @IBOutlet weak var favButton: FavoriteButton!
     @IBOutlet weak var contentViewOfImage: UIView!
+    @IBOutlet weak var directionButton: UIButton!
     
     // MARK: - Properties
     private var myParent: BaseScreenViewController?
@@ -29,12 +30,14 @@ class DetailsViewController: UIViewController {
         super.viewWillAppear(animated)
         if placeDetailsIsAskedFromFavorite {
             favButton.isHidden = true
+            directionButton.isHidden = false
             displayFavoritePlaceInformation()
         } else {
             if EcoPlaceEntity.placeAlreadyInFavorite(name: (curentPlace["title"] as? String)!) {
                 favButton.activateButton(bool: true)
             }
             favButton.isHidden = false
+            directionButton.isHidden = true
             getAndDisplayCurrentPlaceInfo()
         }
     }
@@ -54,11 +57,17 @@ class DetailsViewController: UIViewController {
     }
 
     @IBAction func didTapPhoneNumber(_ sender: UIButton) {
-        guard let phone = curentPlace["phoneNumber"] as? String else { return }
-        print(phone)
-        guard let url = URL(string: phone) else { return }
-        print(phone)
-        UIApplication.shared.open(url)
+        if placeDetailsIsAskedFromFavorite {
+            guard let phone = favoritePlace?.phoneAtb else { return }
+            let formattedPhoneNumber = phone.replacingOccurrences(of: " ", with: "")
+            guard let url = URL(string:"tel://\(formattedPhoneNumber)") else { return }
+            UIApplication.shared.open(url)
+        } else {
+            guard let phone = curentPlace["phoneNumber"] as? String else { return }
+            let formattedPhoneNumber = phone.replacingOccurrences(of: " ", with: "")
+            guard let url = URL(string: "tel://\(formattedPhoneNumber)") else { return }
+            UIApplication.shared.open(url)
+        }
     }
 
     @IBAction func didTapWebsite(_ sender: UIButton) {

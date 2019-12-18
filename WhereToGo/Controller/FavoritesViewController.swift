@@ -22,6 +22,11 @@ class FavoritesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.isToolbarHidden = true // Toolbar with Trash icon is hidden
+        if favoritePlaces.isEmpty {
+            editButtonItem.isEnabled = false
+        } else {
+            editButtonItem.isEnabled = true
+        }
         navigationItem.rightBarButtonItem = editButtonItem // Add Edit Button item in navigation bar
         favoritePlaces = EcoPlaceEntity.fetchAll()
         collectionView.reloadData()
