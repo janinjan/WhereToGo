@@ -6,7 +6,6 @@
 //  Copyright © 2019 Janin Culhaoglu. All rights reserved.
 //
 
-import UIKit
 import MapKit
 
 class PointOfInterest: NSObject, MKAnnotation {
