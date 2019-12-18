@@ -74,6 +74,12 @@ class BaseScreenViewController: UIViewController, CityPickerDelegate {
         setupSlider()
         NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveData(_:)), name: Notification.Name("didReceiveData"), object: nil)
         getDatas(city: City.naples.name())
+        getDatas(city: City.paris.name())
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        collectionView.reloadData()
     }
 
     // MARK: - Actions
@@ -91,6 +97,22 @@ class BaseScreenViewController: UIViewController, CityPickerDelegate {
         navigationController?.pushViewController(newDetailViewController, animated: true)
     }
 
+    @IBAction func unwindSegue(segue: UIStoryboardSegue) {
+        if segue.source is DetailsViewController {
+            if let senderVC = segue.source as? DetailsViewController {
+                let favoritePlace = senderVC.favoritePlace
+                var coordinate : CLLocation?
+                coordinate = CLLocation(latitude: favoritePlace!.coordinateLatAtb, longitude: favoritePlace!.coordinateLongAtb)
+                displayAnnotations(type: .all)
+                if coordinate != nil {
+                    guard let center = coordinate?.coordinate else { return }
+                    let region = MKCoordinateRegion(center: center, latitudinalMeters: 200 * 2.0, longitudinalMeters: 200 * 2.0)
+                    mapView.setRegion(region, animated: true)
+                }
+            }
+        }
+    }
+
     // MARK: - Segue to Cities TableView
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == segueIdentifier {
@@ -105,6 +127,7 @@ class BaseScreenViewController: UIViewController, CityPickerDelegate {
         selectedCity = name
         getDatas(city: name.name())
         setupMapCoordinate() // Update view to selected city's coordinates
+        collectionView.reloadData()
     }
 
     // Retreive user's city name with geocoder
@@ -180,7 +203,7 @@ extension BaseScreenViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoryCell", for: indexPath) as? CategoryCollectionViewCell else { return UICollectionViewCell() }
 
         cell.category = categories[indexPath.row]
-        cell.chevronDownSymbol.tintColor = .clear
+        cell.chevronDownSymbol.isHidden = true
         cell.categoryName.textColor = .darkGray
         return cell
     }
@@ -194,7 +217,7 @@ extension BaseScreenViewController: UICollectionViewDelegate {
         collectionView.isMultipleTouchEnabled = false
         guard let selectedCell = collectionView.cellForItem(at: indexPath) as? CategoryCollectionViewCell else { return }
         selectedCell.categoryName.textColor = .black
-        selectedCell.chevronDownSymbol.tintColor = .black
+        selectedCell.chevronDownSymbol.isHidden = false
 
         switch indexPath.item {
         case 0:
@@ -220,7 +243,7 @@ extension BaseScreenViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         guard let selectedCell = collectionView.cellForItem(at: indexPath) as? CategoryCollectionViewCell else { return }
         selectedCell.categoryName.textColor = .greyLabel
-        selectedCell.chevronDownSymbol.tintColor = .clear
+        selectedCell.chevronDownSymbol.isHidden = true
     }
 }
 
@@ -233,6 +256,10 @@ extension BaseScreenViewController: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 5
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 86, height: 107)
     }
 }
 
