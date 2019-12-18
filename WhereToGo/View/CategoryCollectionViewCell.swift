@@ -23,7 +23,7 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     }
 
     override func awakeFromNib() {
-        chevronDownSymbol.image = UIImage(named: "ChevronDown")
+        chevronDownSymbol.image = UIImage(named: "ChevronDownBlack")
         categoryName.textColor = .greyLabel
     }
 }
